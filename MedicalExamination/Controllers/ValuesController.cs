@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using MedicalExamination.DAL;
+using MedicalExamination.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MedicalExamination.Controllers
@@ -7,6 +9,13 @@ namespace MedicalExamination.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private IGenericRepository<ApplicationUser> userRepository;
+
+        public ValuesController()
+        {
+            
+        }
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()

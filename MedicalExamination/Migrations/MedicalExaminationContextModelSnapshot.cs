@@ -82,7 +82,7 @@ namespace MedicalExamination.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("DiaseOutcomeId");
+                    b.Property<Guid>("DiseaseOutcomeId");
 
                     b.Property<int>("DoctorId");
 
@@ -94,7 +94,7 @@ namespace MedicalExamination.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DiaseOutcomeId");
+                    b.HasIndex("DiseaseOutcomeId");
 
                     b.HasIndex("DoctorId");
 
@@ -105,7 +105,7 @@ namespace MedicalExamination.Migrations
                     b.ToTable("Appointments");
                 });
 
-            modelBuilder.Entity("MedicalExamination.Entities.DiagnosType", b =>
+            modelBuilder.Entity("MedicalExamination.Entities.DiagnosisType", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -115,10 +115,10 @@ namespace MedicalExamination.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DiagnosTypes");
+                    b.ToTable("DiagnosesTypes");
                 });
 
-            modelBuilder.Entity("MedicalExamination.Entities.DiaseOutcomeType", b =>
+            modelBuilder.Entity("MedicalExamination.Entities.DiseaseOutcomeType", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -128,7 +128,7 @@ namespace MedicalExamination.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DiaseOutcomeTypes");
+                    b.ToTable("DiseaseOutcomeTypes");
                 });
 
             modelBuilder.Entity("MedicalExamination.Entities.Doctor", b =>
@@ -199,14 +199,14 @@ namespace MedicalExamination.Migrations
                     b.ToTable("Patients");
                 });
 
-            modelBuilder.Entity("MedicalExamination.Entities.PatientDiagnos", b =>
+            modelBuilder.Entity("MedicalExamination.Entities.PatientDiagnosis", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<Guid>("AppointmentId");
 
-                    b.Property<Guid>("DiagnosId");
+                    b.Property<Guid>("DiagnosisId");
 
                     b.Property<bool>("IsMain");
 
@@ -214,7 +214,7 @@ namespace MedicalExamination.Migrations
 
                     b.HasIndex("AppointmentId");
 
-                    b.HasIndex("DiagnosId");
+                    b.HasIndex("DiagnosisId");
 
                     b.ToTable("PatientDiagnoses");
                 });
@@ -348,9 +348,9 @@ namespace MedicalExamination.Migrations
 
             modelBuilder.Entity("MedicalExamination.Entities.Appointment", b =>
                 {
-                    b.HasOne("MedicalExamination.Entities.DiaseOutcomeType", "Outcome")
+                    b.HasOne("MedicalExamination.Entities.DiseaseOutcomeType", "Outcome")
                         .WithMany()
-                        .HasForeignKey("DiaseOutcomeId")
+                        .HasForeignKey("DiseaseOutcomeId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("MedicalExamination.Entities.Doctor", "Doctor")
@@ -395,16 +395,16 @@ namespace MedicalExamination.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MedicalExamination.Entities.PatientDiagnos", b =>
+            modelBuilder.Entity("MedicalExamination.Entities.PatientDiagnosis", b =>
                 {
                     b.HasOne("MedicalExamination.Entities.Appointment", "Appointment")
                         .WithMany()
                         .HasForeignKey("AppointmentId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("MedicalExamination.Entities.DiagnosType", "Diagnos")
+                    b.HasOne("MedicalExamination.Entities.DiagnosisType", "Diagnosis")
                         .WithMany()
-                        .HasForeignKey("DiagnosId")
+                        .HasForeignKey("DiagnosisId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -25,9 +25,8 @@ namespace MedicalExamination.DAL
         /// </summary>
         /// <param name="context"></param>
         /// <param name="unitOfWork"></param>
-        protected GenericRepository(MedicalExaminationContext context, IUnitOfWork unitOfWork)
+        protected GenericRepository(MedicalExaminationContext context)
         {
-            unitOfWork.Register(this);
             this._context = context;
             this._entities = context.Set<TEntity>();
         }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using MedicalExamination.DAL;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -7,20 +6,32 @@ namespace MedicalExamination
 {
     public class BootStrapper
     {
-        public static void Configure(IServiceCollection service)
+        public static void Configure(IServiceCollection services)
         {
-            var allProviderTypes = System.Reflection.Assembly.GetAssembly(typeof(UnitOfWork)).GetTypes();
-                //.Where(t => t.Namespace != null && t.Namespace.Contains("MeidcalExamination.DAL"));
 
-            foreach (var abstrct in allProviderTypes.Where(t => t.IsAbstract))
+            var allProviderTypes = System.Reflection.Assembly.GetAssembly(typeof(GenericRepository<>))
+                .GetTypes();
+            //.Where(t => t.Namespace != null && t.Namespace.Contains("MeidcalExamination.DAL"));
+            //builder.RegisterGeneric(typeof(IGenericRepository<>))
+            //builder.RegisterAssemblyTypes(allProviderTypes)
+            //    .Where(t => t.Name.EndsWith("Repository") && t.IsClass)
+            //    .As<IGenericRepository<,>>();
+
+            foreach (var implementation in allProviderTypes.Where(t => t.Name.EndsWith("Repository") && t.IsClass))
             {
-                var implementaion = allProviderTypes.FirstOrDefault(c => c.IsClass && abstrct.Name == c.Name);
+                var abstrcts = implementation.GetInterfaces();
 
-                if (implementaion != null)
+                if (abstrcts.Length > 0)
                 {
-                    Type interfaceType = abstrct.GetGenericArguments()[0];
-                    //service.AddTransient<typeof(interfaceType), > ()
+                    services.AddTransient(abstrcts[0], implementation);
+                    //services.AddScoped(abstrcts[0], implementation);
                 }
+
+                //if (implementaion != null)
+                //{ 
+                //    Type interfaceType = abstrct.GetGenericArguments()[0];
+                //    services.AddScoped(abstrct, implementaion);
+                //}
             }
         }
     }

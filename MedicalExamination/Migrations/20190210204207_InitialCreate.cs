@@ -9,7 +9,7 @@ namespace MedicalExamination.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "DiagnosTypes",
+                name: "DiagnosesTypes",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -17,11 +17,11 @@ namespace MedicalExamination.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DiagnosTypes", x => x.Id);
+                    table.PrimaryKey("PK_DiagnosesTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "DiaseOutcomeTypes",
+                name: "DiseaseOutcomeTypes",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -29,7 +29,7 @@ namespace MedicalExamination.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DiaseOutcomeTypes", x => x.Id);
+                    table.PrimaryKey("PK_DiseaseOutcomeTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -267,7 +267,7 @@ namespace MedicalExamination.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     DoctorId = table.Column<int>(nullable: false),
                     PatientId = table.Column<int>(nullable: false),
-                    DiaseOutcomeId = table.Column<Guid>(nullable: false),
+                    DiseaseOutcomeId = table.Column<Guid>(nullable: false),
                     ExaminationResultId = table.Column<Guid>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: false)
                 },
@@ -275,9 +275,9 @@ namespace MedicalExamination.Migrations
                 {
                     table.PrimaryKey("PK_Appointments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Appointments_DiaseOutcomeTypes_DiaseOutcomeId",
-                        column: x => x.DiaseOutcomeId,
-                        principalTable: "DiaseOutcomeTypes",
+                        name: "FK_Appointments_DiseaseOutcomeTypes_DiseaseOutcomeId",
+                        column: x => x.DiseaseOutcomeId,
+                        principalTable: "DiseaseOutcomeTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -341,7 +341,7 @@ namespace MedicalExamination.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     AppointmentId = table.Column<Guid>(nullable: false),
-                    DiagnosId = table.Column<Guid>(nullable: false),
+                    DiagnosisId = table.Column<Guid>(nullable: false),
                     IsMain = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -354,17 +354,17 @@ namespace MedicalExamination.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PatientDiagnoses_DiagnosTypes_DiagnosId",
-                        column: x => x.DiagnosId,
-                        principalTable: "DiagnosTypes",
+                        name: "FK_PatientDiagnoses_DiagnosesTypes_DiagnosisId",
+                        column: x => x.DiagnosisId,
+                        principalTable: "DiagnosesTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Appointments_DiaseOutcomeId",
+                name: "IX_Appointments_DiseaseOutcomeId",
                 table: "Appointments",
-                column: "DiaseOutcomeId");
+                column: "DiseaseOutcomeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Appointments_DoctorId",
@@ -392,9 +392,9 @@ namespace MedicalExamination.Migrations
                 column: "AppointmentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PatientDiagnoses_DiagnosId",
+                name: "IX_PatientDiagnoses_DiagnosisId",
                 table: "PatientDiagnoses",
-                column: "DiagnosId");
+                column: "DiagnosisId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Patients_InsuranceCompanyId",
@@ -463,7 +463,7 @@ namespace MedicalExamination.Migrations
                 name: "Appointments");
 
             migrationBuilder.DropTable(
-                name: "DiagnosTypes");
+                name: "DiagnosesTypes");
 
             migrationBuilder.DropTable(
                 name: "PositionTypes");
@@ -472,7 +472,7 @@ namespace MedicalExamination.Migrations
                 name: "ServiceTypes");
 
             migrationBuilder.DropTable(
-                name: "DiaseOutcomeTypes");
+                name: "DiseaseOutcomeTypes");
 
             migrationBuilder.DropTable(
                 name: "Doctors");

@@ -7,7 +7,7 @@ namespace MedicalExamination.DAL
     /// </summary>
     public sealed class ServiceHistoryRepository : GenericRepository<ServiceHistory>
     {
-        public ServiceHistoryRepository(MedicalExaminationContext context, IUnitOfWork unitOfWork) : base(context, unitOfWork)
+        public ServiceHistoryRepository(MedicalExaminationContext context) : base(context)
         {
         }
     }

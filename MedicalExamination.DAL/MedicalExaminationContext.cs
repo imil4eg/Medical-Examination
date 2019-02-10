@@ -20,14 +20,14 @@ namespace MedicalExamination.DAL
         public DbSet<ApplicationUser> Users { get; set; }
         public DbSet<ApplicationRole> Roles { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
-        public DbSet<DiagnosType> DiagnosTypes { get; set; }
-        public DbSet<DiaseOutcomeType> DiaseOutcomeTypes { get; set; }
+        public DbSet<DiagnosisType> DiagnosesTypes { get; set; }
+        public DbSet<DiseaseOutcomeType> DiseaseOutcomeTypes { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
-        public DbSet<ExaminationResultTypeRepostiory> ExaminationResultTypes { get; set; }
+        public DbSet<ExaminationResultType> ExaminationResultTypes { get; set; }
         public DbSet<InsuranceCompanyType> InsuranceCompanyTypes { get; set; }
         public DbSet<PassportIssuePlaceType> PassportIssuePlaceTypes { get; set; }
         public DbSet<Patient> Patients { get; set; }
-        public DbSet<PatientDiagnos> PatientDiagnoses { get; set; }
+        public DbSet<PatientDiagnosis> PatientDiagnoses { get; set; }
         public DbSet<Person> Persons { get; set; }
         public DbSet<Position> Positions { get; set; }
         public DbSet<PositionType> PositionTypes { get; set; }

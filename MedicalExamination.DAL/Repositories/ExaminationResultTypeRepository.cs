@@ -5,9 +5,9 @@ namespace MedicalExamination.DAL
     /// <summary>
     /// Repository for <see cref="ExaminationResultType"/>
     /// </summary>
-    public sealed class ExaminationResultTypeRepostiory : GenericRepository<ExaminationResultType>
+    public sealed class ExaminationResultTypeRepository : GenericRepository<ExaminationResultType>
     {
-        public ExaminationResultTypeRepostiory(MedicalExaminationContext context, IUnitOfWork unitOfWork) : base(context, unitOfWork)
+        public ExaminationResultTypeRepository(MedicalExaminationContext context) : base(context)
         {
         }
     }

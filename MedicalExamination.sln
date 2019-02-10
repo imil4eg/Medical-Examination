@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalExamination", "Medic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalExamination.Entities", "MedicalExamination.Entities\MedicalExamination.Entities.csproj", "{5228FF69-D8EA-4D97-8A1D-B8300242C1C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalExamination.DAL", "MedicalExamination.DAL\MedicalExamination.DAL.csproj", "{D60BB199-AF50-4FB3-8770-694E300E150E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalExamination.DAL", "MedicalExamination.DAL\MedicalExamination.DAL.csproj", "{D60BB199-AF50-4FB3-8770-694E300E150E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalExamination.BLL", "MedicalExamination.BLL\MedicalExamination.BLL.csproj", "{F7CB9BA0-EDB1-4B29-92B4-AA35AFEF0C67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{D60BB199-AF50-4FB3-8770-694E300E150E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D60BB199-AF50-4FB3-8770-694E300E150E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D60BB199-AF50-4FB3-8770-694E300E150E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7CB9BA0-EDB1-4B29-92B4-AA35AFEF0C67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7CB9BA0-EDB1-4B29-92B4-AA35AFEF0C67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7CB9BA0-EDB1-4B29-92B4-AA35AFEF0C67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7CB9BA0-EDB1-4B29-92B4-AA35AFEF0C67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,7 +7,7 @@ namespace MedicalExamination.DAL
     /// </summary>
     public sealed class PositionRepository : GenericRepository<Position>
     {
-        public PositionRepository(MedicalExaminationContext context, IUnitOfWork unitOfWork) : base(context, unitOfWork)
+        public PositionRepository(MedicalExaminationContext context) : base(context)
         {
         }
     }

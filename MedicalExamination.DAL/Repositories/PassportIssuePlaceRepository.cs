@@ -7,7 +7,7 @@ namespace MedicalExamination.DAL
     /// </summary>
     public sealed class PassportIssuePlaceRepository : GenericRepository<PassportIssuePlaceType>
     {
-        public PassportIssuePlaceRepository(MedicalExaminationContext context, IUnitOfWork unitOfWork) : base(context, unitOfWork)
+        public PassportIssuePlaceRepository(MedicalExaminationContext context) : base(context)
         {
         }
     }

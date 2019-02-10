@@ -3,7 +3,7 @@
     /// <summary>
     /// Dictionary of diagnosis
     /// </summary>
-    public sealed class DiagnosType : BaseTypeEntity
+    public sealed class DiagnosisType : BaseTypeEntity
     {
     }
 }

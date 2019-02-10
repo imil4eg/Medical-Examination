@@ -7,7 +7,7 @@ namespace MedicalExamination.DAL
     /// </summary>
     public sealed class RoleRepository : GenericRepository<ApplicationRole>
     {
-        public RoleRepository(MedicalExaminationContext context, IUnitOfWork unitOfWork) : base(context, unitOfWork)
+        public RoleRepository(MedicalExaminationContext context) : base(context)
         {
         }
     }

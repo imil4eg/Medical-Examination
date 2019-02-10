@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MedicalExamination.Entities
 {
-    public sealed class PatientDiagnos
+    public sealed class PatientDiagnosis
     {
         [Key]
         public Guid Id { get; set; }
@@ -13,9 +13,9 @@ namespace MedicalExamination.Entities
         [ForeignKey("AppointmentId")]
         public Appointment Appointment { get; set; }
 
-        public Guid DiagnosId { get; set; }
-        [ForeignKey("DiagnosId")]
-        public DiagnosType Diagnos { get; set; }
+        public Guid DiagnosisId { get; set; }
+        [ForeignKey("DiagnosisId")]
+        public DiagnosisType Diagnosis { get; set; }
 
         public bool IsMain { get; set; }
     }
