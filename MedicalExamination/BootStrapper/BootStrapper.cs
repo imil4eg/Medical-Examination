@@ -1,37 +1,62 @@
 ﻿using System.Linq;
+using MedicalExamination.BLL;
 using MedicalExamination.DAL;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MedicalExamination
 {
+    /// <summary>
+    /// Class for Dependency Injection Services
+    /// from MedicalExamination.BLL and Repositories from MedicalExamination.DAL
+    /// </summary>
     public class BootStrapper
     {
+        /// <summary>
+        /// Configure dependency injection
+        /// </summary>
+        /// <param name="services"></param>
         public static void Configure(IServiceCollection services)
         {
+            AddAllRepositories(services);
+            AddAllServices(services);
+        }
 
+        /// <summary>
+        /// Injects repositories
+        /// </summary>
+        /// <param name="services"></param>
+        public static void AddAllRepositories(IServiceCollection services)
+        {
             var allProviderTypes = System.Reflection.Assembly.GetAssembly(typeof(GenericRepository<>))
                 .GetTypes();
-            //.Where(t => t.Namespace != null && t.Namespace.Contains("MeidcalExamination.DAL"));
-            //builder.RegisterGeneric(typeof(IGenericRepository<>))
-            //builder.RegisterAssemblyTypes(allProviderTypes)
-            //    .Where(t => t.Name.EndsWith("Repository") && t.IsClass)
-            //    .As<IGenericRepository<,>>();
 
             foreach (var implementation in allProviderTypes.Where(t => t.Name.EndsWith("Repository") && t.IsClass))
             {
-                var abstrcts = implementation.GetInterfaces();
+                var repositoryAbstraction = implementation.GetInterfaces();
 
-                if (abstrcts.Length > 0)
+                if (repositoryAbstraction.Length > 0)
                 {
-                    services.AddTransient(abstrcts[0], implementation);
-                    //services.AddScoped(abstrcts[0], implementation);
+                    services.AddTransient(repositoryAbstraction[0], implementation);
                 }
+            }
+        }
 
-                //if (implementaion != null)
-                //{ 
-                //    Type interfaceType = abstrct.GetGenericArguments()[0];
-                //    services.AddScoped(abstrct, implementaion);
-                //}
+        /// <summary>
+        /// Injects services
+        /// </summary>
+        /// <param name="services"></param>
+        public static void AddAllServices(IServiceCollection services)
+        {
+            var serviceTypes = System.Reflection.Assembly.GetAssembly(typeof(IAppointmentService)).GetTypes();
+
+            foreach (var serviceImplementation in serviceTypes.Where(s => s.IsClass))
+            {
+                var serviceAbstraction = serviceImplementation.GetInterfaces();
+
+                if (serviceAbstraction.Length > 0)
+                {
+                    services.AddTransient(serviceAbstraction[0], serviceImplementation);
+                }
             }
         }
     }

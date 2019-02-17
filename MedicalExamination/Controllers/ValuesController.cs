@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MedicalExamination.BLL;
 using MedicalExamination.DAL;
 using MedicalExamination.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,7 @@ namespace MedicalExamination.Controllers
     {
         private IGenericRepository<ApplicationUser> userRepository;
 
-        public ValuesController()
+        public ValuesController(IAppointmentService appointment)
         {
             
         }

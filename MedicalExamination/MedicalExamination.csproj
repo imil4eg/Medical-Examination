@@ -272,6 +272,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MedicalExamination.BLL\MedicalExamination.BLL.csproj" />
     <ProjectReference Include="..\MedicalExamination.DAL\MedicalExamination.DAL.csproj" />
   </ItemGroup>
 
