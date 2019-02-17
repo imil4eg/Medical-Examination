@@ -1,4 +1,5 @@
-﻿using MedicalExamination.Entities;
+﻿using System.Linq;
+using MedicalExamination.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace MedicalExamination.DAL
@@ -14,7 +15,7 @@ namespace MedicalExamination.DAL
         /// <param name="options"></param>
         public MedicalExaminationContext(DbContextOptions<MedicalExaminationContext> options) : base(options)
         {
-
+            
         }
 
         public DbSet<ApplicationUser> Users { get; set; }
@@ -34,5 +35,17 @@ namespace MedicalExamination.DAL
         public DbSet<ProvideService> ProvideServices { get; set; }
         public DbSet<ServiceType> ServiceTypes { get; set; }
         public DbSet<ServiceHistory> ServiceHistories { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            //{
+            //    relationship    
+            //}
+
+            modelBuilder.Entity<Patient>().HasOne(p => p.Person).WithOne().OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Appointment>().HasOne(p => p.Patient).WithOne().OnDelete(DeleteBehavior.Restrict);
+        }
     }
 }

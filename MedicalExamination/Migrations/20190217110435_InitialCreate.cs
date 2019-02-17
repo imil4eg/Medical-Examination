@@ -232,7 +232,7 @@ namespace MedicalExamination.Migrations
                         column: x => x.PersonId,
                         principalTable: "Persons",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -297,7 +297,7 @@ namespace MedicalExamination.Migrations
                         column: x => x.PatientId,
                         principalTable: "Patients",
                         principalColumn: "PersonId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -379,7 +379,8 @@ namespace MedicalExamination.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Appointments_PatientId",
                 table: "Appointments",
-                column: "PatientId");
+                column: "PatientId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Doctors_UserId",

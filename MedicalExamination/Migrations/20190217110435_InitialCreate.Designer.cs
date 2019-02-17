@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MedicalExamination.Migrations
 {
     [DbContext(typeof(MedicalExaminationContext))]
-    [Migration("20190210204207_InitialCreate")]
+    [Migration("20190217110435_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -102,7 +102,8 @@ namespace MedicalExamination.Migrations
 
                     b.HasIndex("ExaminationResultId");
 
-                    b.HasIndex("PatientId");
+                    b.HasIndex("PatientId")
+                        .IsUnique();
 
                     b.ToTable("Appointments");
                 });
@@ -366,9 +367,9 @@ namespace MedicalExamination.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("MedicalExamination.Entities.Patient", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithOne()
+                        .HasForeignKey("MedicalExamination.Entities.Appointment", "PatientId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("MedicalExamination.Entities.Doctor", b =>
@@ -392,9 +393,9 @@ namespace MedicalExamination.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("MedicalExamination.Entities.Person", "Person")
-                        .WithMany()
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithOne()
+                        .HasForeignKey("MedicalExamination.Entities.Patient", "PersonId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("MedicalExamination.Entities.PatientDiagnosis", b =>
