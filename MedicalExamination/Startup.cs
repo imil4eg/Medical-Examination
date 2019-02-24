@@ -1,13 +1,13 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MedicalExamination.DAL;
+using MedicalExamination.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Unity;
-using Unity.Injection;
-using Unity.Lifetime;
 
 namespace MedicalExamination
 {
@@ -16,7 +16,7 @@ namespace MedicalExamination
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-        }
+        } 
 
         public IConfiguration Configuration { get; }
 
@@ -28,7 +28,17 @@ namespace MedicalExamination
                 options.UseSqlServer(Configuration.GetConnectionString("MedicalExamination"),
                     b => b.MigrationsAssembly("MedicalExamination")));
             BootStrapper.Configure(services);
-            //services.AddScoped(typeof(IGenericRepository<>), typeof(IGenericRepository<>));
+
+            var mappingConfigurator = new MapperConfiguration(mc => { mc.AddProfile(new MappingProfile()); });
+            IMapper mapper = mappingConfigurator.CreateMapper();
+            services.AddSingleton(mapper);
+
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+                .AddEntityFrameworkStores<MedicalExaminationContext>()
+                .AddDefaultTokenProviders();
+
+            services.AddAuthentication()
+                .AddCookie(options => { options.LoginPath = "/Authorization/Login"; });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

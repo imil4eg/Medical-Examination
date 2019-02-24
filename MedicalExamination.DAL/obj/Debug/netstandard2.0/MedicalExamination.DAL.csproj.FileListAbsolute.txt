@@ -16,3 +16,5 @@ C:\Users\kudryavii\source\repos\MedicalExamination\MedicalExamination.DAL\obj\De
 C:\Users\kudryavii\source\repos\MedicalExamination\MedicalExamination.DAL\obj\Debug\netstandard2.0\MedicalExamination.DAL.csproj.CopyComplete
 C:\Users\kudryavii\source\repos\MedicalExamination\MedicalExamination.DAL\obj\Debug\netstandard2.0\MedicalExamination.DAL.dll
 C:\Users\kudryavii\source\repos\MedicalExamination\MedicalExamination.DAL\obj\Debug\netstandard2.0\MedicalExamination.DAL.pdb
+C:\Users\kudryavii\source\repos\MedicalExamination\MedicalExamination.DAL\bin\Debug\netstandard2.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\kudryavii\source\repos\MedicalExamination\MedicalExamination.DAL\bin\Debug\netstandard2.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.xml

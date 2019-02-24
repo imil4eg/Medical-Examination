@@ -10,9 +10,7 @@ namespace MedicalExamination.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private IGenericRepository<ApplicationUser> userRepository;
-
-        public ValuesController(IAppointmentService appointment)
+        public ValuesController()
         {
             
         }

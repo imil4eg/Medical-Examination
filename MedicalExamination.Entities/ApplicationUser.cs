@@ -6,6 +6,11 @@ namespace MedicalExamination.Entities
 {
     public sealed class ApplicationUser : IdentityUser<Guid>
     {
+        public ApplicationUser()
+        {
+            Id = Guid.NewGuid();
+        }
+
         [Required]
         public override string UserName { get; set; }
         

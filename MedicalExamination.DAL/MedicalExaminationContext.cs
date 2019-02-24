@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System;
 using MedicalExamination.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace MedicalExamination.DAL
@@ -7,7 +9,7 @@ namespace MedicalExamination.DAL
     /// <summary>
     /// DataBase Context
     /// </summary>
-    public sealed class MedicalExaminationContext : DbContext
+    public sealed class MedicalExaminationContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
     {
         /// <summary>
         /// Constructor
@@ -18,8 +20,6 @@ namespace MedicalExamination.DAL
             
         }
 
-        public DbSet<ApplicationUser> Users { get; set; }
-        public DbSet<ApplicationRole> Roles { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<DiagnosisType> DiagnosesTypes { get; set; }
         public DbSet<DiseaseOutcomeType> DiseaseOutcomeTypes { get; set; }
@@ -36,7 +36,6 @@ namespace MedicalExamination.DAL
         public DbSet<ServiceType> ServiceTypes { get; set; }
         public DbSet<ServiceHistory> ServiceHistories { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
@@ -44,6 +43,8 @@ namespace MedicalExamination.DAL
             //    relationship    
             //}
 
+            base.OnModelCreating(modelBuilder);
+            
             modelBuilder.Entity<Patient>().HasOne(p => p.Person).WithOne().OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<Appointment>().HasOne(p => p.Patient).WithOne().OnDelete(DeleteBehavior.Restrict);
         }
