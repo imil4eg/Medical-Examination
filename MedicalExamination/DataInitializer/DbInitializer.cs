@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using MedicalExamination.DAL;
 using MedicalExamination.Entities;
@@ -26,6 +27,9 @@ namespace MedicalExamination
             //_context.Database.EnsureCreated();
             await InitRoles();
             await InitUsers();
+            InitPassportIssuePlaceType();
+            InitInsuranceCompanyType();
+            InitPatients();
         }
 
         private async Task InitUsers()
@@ -50,6 +54,72 @@ namespace MedicalExamination
             _context.SaveChanges();
         }
 
+        private void InitPatients()
+        {
+            if (_context.Patients.Any())
+            {
+                return;
+            }
+
+            var testPassportIssuePlaceType = _context.PassportIssuePlaceTypes.FirstOrDefault();
+            var testInsuranceCompanyType = _context.InsuranceCompanyTypes.FirstOrDefault();
+
+            var testPerson1 = new Person
+            {
+                FirstName = "TestPerson1",
+                LastName = "TestPerson1",
+                BirthDate = DateTime.Now.AddYears(-18),
+                Gender = Gender.Male,
+                SNILS = "684586485648",
+                MiddleName = "test",
+                PassportIssuePlaceId = testPassportIssuePlaceType.Id,
+                PassportIssuePlace = testPassportIssuePlaceType
+            };
+
+            var createdTestPerson = _context.Persons.Add(testPerson1);
+            _context.SaveChanges();
+
+            var testPatient1 = new Patient
+            {
+                PersonId = createdTestPerson.Entity.Id,
+                Person = createdTestPerson.Entity,
+                InsuranceNumber = "846456854",
+                InsuranceCompanyId = testInsuranceCompanyType.Id,
+                InsuranceCompany = testInsuranceCompanyType
+            };
+
+            _context.Patients.Add(testPatient1);
+            _context.SaveChanges();
+
+            var testPerson2 = new Person
+            {
+                FirstName = "TestPerson2",
+                LastName = "TestPerson2",
+                BirthDate = DateTime.Now.AddYears(-19),
+                Gender = Gender.Female,
+                SNILS = "228",
+                MiddleName = "test2",
+                PassportIssuePlaceId = testPassportIssuePlaceType.Id,
+                PassportIssuePlace = testPassportIssuePlaceType
+            };
+
+            var createdTestPerson2 = _context.Persons.Add(testPerson2);
+            _context.SaveChanges();
+
+            var testPatient2 = new Patient
+            {
+                PersonId = createdTestPerson2.Entity.Id,
+                Person = createdTestPerson2.Entity,
+                InsuranceNumber = "95394593",
+                InsuranceCompanyId = testInsuranceCompanyType.Id,
+                InsuranceCompany = testInsuranceCompanyType
+            };
+
+            _context.Patients.Add(testPatient2);
+
+            _context.SaveChanges();
+        }
+
         private async Task InitRoles()
         {
             if (_context.Roles.Any())
@@ -65,6 +135,39 @@ namespace MedicalExamination
 
             var createTestRole =  await _roleManager.CreateAsync(testRole);
 
+            _context.SaveChanges();
+        }
+
+        private void InitPassportIssuePlaceType()
+        {
+            if (_context.PassportIssuePlaceTypes.Any())
+            {
+                return;
+            }
+
+            var testPassportIssuePlaceType = new PassportIssuePlaceType
+            {
+                Name = "Test"
+            };
+
+            _context.PassportIssuePlaceTypes.Add(testPassportIssuePlaceType);
+
+            _context.SaveChanges();
+        }
+
+        private void InitInsuranceCompanyType()
+        {
+            if (_context.InsuranceCompanyTypes.Any())
+            {
+                return;
+            }
+
+            var testInsuranceCompanyType = new InsuranceCompanyType
+            {
+                Name = "Test Insurance Company"
+            };
+
+            _context.InsuranceCompanyTypes.Add(testInsuranceCompanyType);
             _context.SaveChanges();
         }
     }

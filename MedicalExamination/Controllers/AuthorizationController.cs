@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using MedicalExamination.BLL;
 using MedicalExamination.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,8 +11,6 @@ namespace MedicalExamination.Controllers
     [ApiController]
     public sealed class AuthorizationController : ControllerBase
     {
-        private IUserService _userService;
-
         private readonly UserManager<ApplicationUser> _userManager;
 
         private readonly SignInManager<ApplicationUser> _signInManager;

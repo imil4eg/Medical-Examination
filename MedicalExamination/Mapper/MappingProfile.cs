@@ -8,6 +8,8 @@ namespace MedicalExamination
         public MappingProfile()
         {
             CreateMap<ApplicationUser, LoginModel>();
+            CreateMap<Patient, PatientModel>();
+            CreateMap<Person, PersonModel>();
         }
     }
 }
