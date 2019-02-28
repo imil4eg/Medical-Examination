@@ -2,6 +2,7 @@
 using MedicalExamination.BLL;
 using MedicalExamination.Entities;
 using Microsoft.AspNetCore.Mvc;
+using SimpleMapper;
 
 namespace MedicalExamination.Controllers
 {
@@ -39,12 +40,11 @@ namespace MedicalExamination.Controllers
         [Route("insert")]
         public ActionResult InsertPatient([FromBody] PatientModel model)
         {
-            //_patientService.CreatePatient(patient);
+            var patientModel = new MedicalExamination.BLL.PatientModel();
+            patientModel = SimpleMapper.Mapper.Map<PatientModel, MedicalExamination.BLL.PatientModel>(model);
+            patientModel.Person = SimpleMapper.Mapper.Map<PatientModel, MedicalExamination.BLL.PersonModel>(model);
 
-            var person = Mapper.Map<PatientModel, Person>(model);
-            //var person = _mapper.Map<PersonModel, Person>(model.Person);
-            var patient = Mapper.Map<PatientModel, Patient>(model);
-            patient.Person = person;
+            _patientService.CreatePatient(patientModel);
 
             return Ok();
         }

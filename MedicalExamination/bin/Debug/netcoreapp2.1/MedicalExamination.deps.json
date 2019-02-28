@@ -29,7 +29,8 @@
           "MedicalExamination.DAL": "1.0.0",
           "Microsoft.AspNetCore.App": "2.1.1",
           "Microsoft.EntityFrameworkCore.Tools": "2.1.4",
-          "Microsoft.NETCore.App": "2.1.0"
+          "Microsoft.NETCore.App": "2.1.0",
+          "SimpleMapper": "1.0.0"
         },
         "runtime": {
           "MedicalExamination.dll": {}
@@ -357,7 +358,8 @@
       "MedicalExamination.BLL/1.0.0": {
         "dependencies": {
           "MedicalExamination.DAL": "1.0.0",
-          "MedicalExamination.Entities": "1.0.0"
+          "MedicalExamination.Entities": "1.0.0",
+          "SimpleMapper": "1.0.0"
         },
         "runtime": {
           "MedicalExamination.BLL.dll": {}
@@ -383,6 +385,14 @@
         },
         "compile": {
           "MedicalExamination.Entities.dll": {}
+        }
+      },
+      "SimpleMapper/1.0.0": {
+        "runtime": {
+          "SimpleMapper.dll": {}
+        },
+        "compile": {
+          "SimpleMapper.dll": {}
         }
       },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
@@ -3381,6 +3391,11 @@
       "sha512": ""
     },
     "MedicalExamination.Entities/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SimpleMapper/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

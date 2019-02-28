@@ -20,3 +20,6 @@ C:\Users\kudryavii\source\repos\MedicalExamination\MedicalExamination.BLL\obj\De
 C:\Users\kudryavii\source\repos\MedicalExamination\MedicalExamination.BLL\obj\Debug\netstandard2.0\MedicalExamination.BLL.pdb
 C:\Users\kudryavii\source\repos\MedicalExamination\MedicalExamination.BLL\bin\Debug\netstandard2.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\kudryavii\source\repos\MedicalExamination\MedicalExamination.BLL\bin\Debug\netstandard2.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.xml
+C:\Users\kudryavii\source\repos\MedicalExamination\MedicalExamination.BLL\bin\Debug\netstandard2.0\SimpleMapper.dll
+C:\Users\kudryavii\source\repos\MedicalExamination\MedicalExamination.BLL\bin\Debug\netstandard2.0\Microsoft.CSharp.dll
+C:\Users\kudryavii\source\repos\MedicalExamination\MedicalExamination.BLL\bin\Debug\netstandard2.0\SimpleMapper.pdb

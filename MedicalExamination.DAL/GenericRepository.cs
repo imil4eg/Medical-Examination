@@ -54,9 +54,10 @@ namespace MedicalExamination.DAL
         /// Insert item into
         /// </summary>
         /// <param name="entity"></param>
-        public void Insert(TEntity entity)
+        public TEntity Insert(TEntity entity)
         {
-            _entities.Add(entity);
+            var result = _entities.Add(entity);
+            return result.Entity;
         }
 
         /// <summary>

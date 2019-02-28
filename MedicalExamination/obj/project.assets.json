@@ -4352,7 +4352,8 @@
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
           "MedicalExamination.DAL": "1.0.0",
-          "MedicalExamination.Entities": "1.0.0"
+          "MedicalExamination.Entities": "1.0.0",
+          "SimpleMapper": "1.0.0"
         },
         "compile": {
           "bin/placeholder/MedicalExamination.BLL.dll": {}
@@ -4382,6 +4383,16 @@
         },
         "runtime": {
           "bin/placeholder/MedicalExamination.Entities.dll": {}
+        }
+      },
+      "SimpleMapper/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/SimpleMapper.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SimpleMapper.dll": {}
         }
       }
     }
@@ -11631,6 +11642,11 @@
       "type": "project",
       "path": "../MedicalExamination.Entities/MedicalExamination.Entities.csproj",
       "msbuildProject": "../MedicalExamination.Entities/MedicalExamination.Entities.csproj"
+    },
+    "SimpleMapper/1.0.0": {
+      "type": "project",
+      "path": "../SimpleMapper/SimpleMapper.csproj",
+      "msbuildProject": "../SimpleMapper/SimpleMapper.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -11640,7 +11656,8 @@
       "MedicalExamination.DAL >= 1.0.0",
       "Microsoft.AspNetCore.App >= 2.1.1",
       "Microsoft.EntityFrameworkCore.Tools >= 2.1.4",
-      "Microsoft.NETCore.App >= 2.1.0"
+      "Microsoft.NETCore.App >= 2.1.0",
+      "SimpleMapper >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -11679,6 +11696,9 @@
             },
             "C:\\Users\\kudryavii\\source\\repos\\MedicalExamination\\MedicalExamination.DAL\\MedicalExamination.DAL.csproj": {
               "projectPath": "C:\\Users\\kudryavii\\source\\repos\\MedicalExamination\\MedicalExamination.DAL\\MedicalExamination.DAL.csproj"
+            },
+            "C:\\Users\\kudryavii\\source\\repos\\MedicalExamination\\SimpleMapper\\SimpleMapper.csproj": {
+              "projectPath": "C:\\Users\\kudryavii\\source\\repos\\MedicalExamination\\SimpleMapper\\SimpleMapper.csproj"
             }
           }
         }

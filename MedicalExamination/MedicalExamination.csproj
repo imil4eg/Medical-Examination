@@ -274,6 +274,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MedicalExamination.BLL\MedicalExamination.BLL.csproj" />
     <ProjectReference Include="..\MedicalExamination.DAL\MedicalExamination.DAL.csproj" />
+    <ProjectReference Include="..\SimpleMapper\SimpleMapper.csproj" />
   </ItemGroup>
 
 </Project>

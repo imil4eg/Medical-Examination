@@ -10,7 +10,7 @@ namespace MedicalExamination.DAL
     {
         IEnumerable<TEntity> GetAll();
         TEntity GetById(int id);
-        void Insert(TEntity entity);
+        TEntity Insert(TEntity entity);
         void Update(TEntity entity);
         void Delete(TEntity entity);
     }

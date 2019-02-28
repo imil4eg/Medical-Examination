@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MedicalExamination.DAL\MedicalExamination.DAL.csproj" />
     <ProjectReference Include="..\MedicalExamination.Entities\MedicalExamination.Entities.csproj" />
+    <ProjectReference Include="..\SimpleMapper\SimpleMapper.csproj" />
   </ItemGroup>
 
 </Project>

@@ -10,7 +10,7 @@ namespace MedicalExamination.BLL
     {
         IEnumerable<Patient> GetAllPatients();
         Patient GetPatient(int id);
-        void CreatePatient(Patient patient);
+        void CreatePatient(PatientModel patient);
         void UpdatePatient(Patient patient);
         void DeletePatient(Patient patient);
     }

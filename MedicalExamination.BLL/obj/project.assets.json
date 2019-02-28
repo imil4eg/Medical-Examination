@@ -48,6 +48,16 @@
         "runtime": {
           "bin/placeholder/MedicalExamination.Entities.dll": {}
         }
+      },
+      "SimpleMapper/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/SimpleMapper.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SimpleMapper.dll": {}
+        }
       }
     }
   },
@@ -204,13 +214,19 @@
       "type": "project",
       "path": "../MedicalExamination.Entities/MedicalExamination.Entities.csproj",
       "msbuildProject": "../MedicalExamination.Entities/MedicalExamination.Entities.csproj"
+    },
+    "SimpleMapper/1.0.0": {
+      "type": "project",
+      "path": "../SimpleMapper/SimpleMapper.csproj",
+      "msbuildProject": "../SimpleMapper/SimpleMapper.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
       "MedicalExamination.DAL >= 1.0.0",
       "MedicalExamination.Entities >= 1.0.0",
-      "NETStandard.Library >= 2.0.3"
+      "NETStandard.Library >= 2.0.3",
+      "SimpleMapper >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -249,6 +265,9 @@
             },
             "C:\\Users\\kudryavii\\source\\repos\\MedicalExamination\\MedicalExamination.Entities\\MedicalExamination.Entities.csproj": {
               "projectPath": "C:\\Users\\kudryavii\\source\\repos\\MedicalExamination\\MedicalExamination.Entities\\MedicalExamination.Entities.csproj"
+            },
+            "C:\\Users\\kudryavii\\source\\repos\\MedicalExamination\\SimpleMapper\\SimpleMapper.csproj": {
+              "projectPath": "C:\\Users\\kudryavii\\source\\repos\\MedicalExamination\\SimpleMapper\\SimpleMapper.csproj"
             }
           }
         }
