@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MedicalExamination.DAL;
 using MedicalExamination.Entities;
 
@@ -35,14 +36,29 @@ namespace MedicalExamination.BLL
             _patientRepository.Insert(patient);
         }
 
-        public void UpdatePatient(Patient patient)
+        public void UpdatePatient(PatientModel patientModel)
         {
+            var person = SimpleMapper.Mapper.Map<PersonModel, Person>(patientModel.Person);
+            _personRepository.Update(person);
+
+            _personRepository.SaveChanges();
+
+            var patient = SimpleMapper.Mapper.Map<PatientModel, Patient>(patientModel);
+            patient.Person = person;
             _patientRepository.Update(patient);
+            _patientRepository.SaveChanges();
         }
 
-        public void DeletePatient(Patient patient)
+        public void DeletePatient(PatientModel patientModel)
         {
+            var patient = new Patient
+            {
+                PersonId = patientModel.PersonId
+            };
+
             _patientRepository.Delete(patient);
+
+            _patientRepository.SaveChanges();
         }
     }
 }

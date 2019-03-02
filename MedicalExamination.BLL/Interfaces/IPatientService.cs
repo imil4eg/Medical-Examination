@@ -11,7 +11,7 @@ namespace MedicalExamination.BLL
         IEnumerable<Patient> GetAllPatients();
         Patient GetPatient(int id);
         void CreatePatient(PatientModel patient);
-        void UpdatePatient(Patient patient);
-        void DeletePatient(Patient patient);
+        void UpdatePatient(PatientModel patient);
+        void DeletePatient(PatientModel patient);
     }
 }

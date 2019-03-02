@@ -1,8 +1,6 @@
-﻿using AutoMapper;
+﻿using System;
 using MedicalExamination.BLL;
-using MedicalExamination.Entities;
 using Microsoft.AspNetCore.Mvc;
-using SimpleMapper;
 
 namespace MedicalExamination.Controllers
 {
@@ -10,14 +8,10 @@ namespace MedicalExamination.Controllers
     public sealed class PatientController : ControllerBase
     {
         private readonly IPatientService _patientService;
-        private readonly IPersonService _personService;
-        private readonly IMapper _mapper;
 
-        public PatientController(IPatientService patientService, IPersonService personService, IMapper mapper)
+        public PatientController(IPatientService patientService)
         {
             _patientService = patientService;
-            _personService = personService;
-            _mapper = mapper;
         }
 
         [HttpGet]
@@ -29,6 +23,7 @@ namespace MedicalExamination.Controllers
         }
 
         [HttpPost]
+        [Route("getpatient"))]
         public ActionResult GetPatient(int patientId)
         {
             var patient = _patientService.GetPatient(patientId);
@@ -42,11 +37,54 @@ namespace MedicalExamination.Controllers
         {
             var patientModel = new MedicalExamination.BLL.PatientModel();
             patientModel = SimpleMapper.Mapper.Map<PatientModel, MedicalExamination.BLL.PatientModel>(model);
-            patientModel.Person = SimpleMapper.Mapper.Map<PatientModel, MedicalExamination.BLL.PersonModel>(model);
+            patientModel.Person =
+                SimpleMapper.Mapper.Map<PersonModel, MedicalExamination.BLL.PersonModel>(model.Person);
 
             _patientService.CreatePatient(patientModel);
 
             return Ok();
+        }
+
+        [HttpPut]
+        [Route("update")]
+        public ActionResult UpdatePatient([FromBody] PatientModel model)
+        {
+            try
+            {
+                var patientModel = new MedicalExamination.BLL.PatientModel();
+                patientModel = SimpleMapper.Mapper.Map<PatientModel, MedicalExamination.BLL.PatientModel>(model);
+                patientModel.Person =
+                    SimpleMapper.Mapper.Map<PersonModel, MedicalExamination.BLL.PersonModel>(model.Person);
+
+                _patientService.UpdatePatient(patientModel);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete]
+        [Route("delete")]
+        public ActionResult DeletePatient([FromBody] PatientModel model)
+        {
+            try
+            {
+                var patientModel = new MedicalExamination.BLL.PatientModel
+                {
+                    PersonId = model.PersonId
+                };
+
+                _patientService.DeletePatient(patientModel);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
