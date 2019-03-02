@@ -44,7 +44,8 @@ namespace MedicalExamination.DAL
             //}
 
             base.OnModelCreating(modelBuilder);
-            
+
+            modelBuilder.Entity<Worker>().HasOne(w => w.User).WithOne().IsRequired(false);
             modelBuilder.Entity<Patient>().HasOne(p => p.Person).WithOne().OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<Appointment>().HasOne(p => p.Patient).WithOne().OnDelete(DeleteBehavior.Restrict);
         }

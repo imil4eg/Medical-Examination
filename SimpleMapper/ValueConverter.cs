@@ -6,6 +6,9 @@ namespace SimpleMapper
     {
         public static dynamic Convert(Type destinationType, object value)
         {
+            if (value == null)
+                return null;
+
             if (destinationType.IsClass && !destinationType.Assembly.FullName.StartsWith("System."))
                 return null;
 

@@ -11,7 +11,7 @@ namespace MedicalExamination.Entities
         [ForeignKey("PersonId")]
         public Person Person { get; set; }
 
-        public Guid UserId { get; set; }
+        public Guid? UserId { get; set; }
         [ForeignKey("UserId")]
         public ApplicationUser User { get; set; }
     }

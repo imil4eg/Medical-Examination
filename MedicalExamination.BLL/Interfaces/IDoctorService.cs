@@ -10,8 +10,8 @@ namespace MedicalExamination.BLL
     {
         IEnumerable<Worker> GetAllWorkers();
         Worker GetWorker(int id);
-        void CreateWorker(Worker worker);
-        void UpdateWorker(Worker worker);
-        void DeleteWorker(Worker worker);
+        void CreateWorker(WorkerModel workerModel);
+        void UpdateWorker(WorkerModel workerModel);
+        void DeleteWorker(WorkerModel workerModel);
     }
 }
