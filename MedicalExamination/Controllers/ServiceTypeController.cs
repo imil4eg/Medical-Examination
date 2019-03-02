@@ -25,7 +25,7 @@ namespace MedicalExamination.Controllers
         public ActionResult GetServiceType(Guid serviceTypeId)
         {
             return Ok(_serviceTypeService.GetServiceType(serviceTypeId));
-        }
+        }   
 
         [HttpPost]
         [Route("create")]
