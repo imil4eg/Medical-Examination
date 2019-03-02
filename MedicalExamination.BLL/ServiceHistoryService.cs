@@ -4,38 +4,38 @@ using MedicalExamination.Entities;
 
 namespace MedicalExamination.BLL
 {
-    public sealed class ServiceHistoryService : IServiceHistoryService
+    public sealed class ServiceResultService : IServiceResultService
     {
-        private readonly IGenericRepository<ServiceResult> _serviceHistoryRepository;
+        private readonly IGenericRepository<ServiceResult> _serviceResultRepository;
 
-        public ServiceHistoryService(IGenericRepository<ServiceResult> serviceHistoryRepository)
+        public ServiceResultService(IGenericRepository<ServiceResult> serviceResultRepository)
         {
-            _serviceHistoryRepository = serviceHistoryRepository;
+            _serviceResultRepository = serviceResultRepository;
         }
 
-        public IEnumerable<ServiceResult> GetAllServiceHistories()
+        public IEnumerable<ServiceResult> GetAllServiceResults()
         {
-            return _serviceHistoryRepository.GetAll();
+            return _serviceResultRepository.GetAll();
         }
 
-        public ServiceResult GetServiceHistory(int id)
+        public ServiceResult GetServiceResult(int id)
         {
-            return _serviceHistoryRepository.GetById(id);
+            return _serviceResultRepository.GetById(id);
         }
 
-        public void CreateServiceHistory(ServiceResult serviceHistory)
+        public void CreateServiceResult(ServiceResult serviceHistory)
         {
-            _serviceHistoryRepository.Insert(serviceHistory);
+            _serviceResultRepository.Insert(serviceHistory);
         }
 
-        public void UpdateServiceHistory(ServiceResult serviceHistory)
+        public void UpdateServiceResult(ServiceResult serviceHistory)
         {
-            _serviceHistoryRepository.Update(serviceHistory);
+            _serviceResultRepository.Update(serviceHistory);
         }
 
-        public void DeleteServiceHistory(ServiceResult serviceHistory)
+        public void DeleteServiceResult(ServiceResult serviceHistory)
         {
-            _serviceHistoryRepository.Delete(serviceHistory);
+            _serviceResultRepository.Delete(serviceHistory);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MedicalExamination.Entities;
 
 namespace MedicalExamination.BLL
@@ -9,9 +10,9 @@ namespace MedicalExamination.BLL
     public interface IProvideServiceService
     {
         IEnumerable<ProvideService> GetAllProvideServices();
-        ProvideService GetProvideService(int id);
-        void CreateProvideService(ProvideService provideService);
-        void UpdateProvideService(ProvideService provideService);
-        void DeleteProvideService(ProvideService provideService);
+        ProvideService GetProvideService(Guid id);
+        void CreateProvideService(ProvideServiceModel provideServiceModel);
+        void UpdateProvideService(ProvideServiceModel provideServiceModel);
+        void DeleteProvideService(ProvideServiceModel provideServiceModel);
     }
 }
