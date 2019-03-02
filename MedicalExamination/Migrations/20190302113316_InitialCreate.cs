@@ -293,30 +293,6 @@ namespace MedicalExamination.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Doctors",
-                columns: table => new
-                {
-                    PersonId = table.Column<int>(nullable: false),
-                    UserId = table.Column<Guid>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Doctors", x => x.PersonId);
-                    table.ForeignKey(
-                        name: "FK_Doctors_Persons_PersonId",
-                        column: x => x.PersonId,
-                        principalTable: "Persons",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Doctors_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Patients",
                 columns: table => new
                 {
@@ -342,26 +318,25 @@ namespace MedicalExamination.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Positions",
+                name: "Workers",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    DoctorId = table.Column<int>(nullable: false),
-                    PositionId = table.Column<Guid>(nullable: false)
+                    PersonId = table.Column<int>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Positions", x => x.Id);
+                    table.PrimaryKey("PK_Workers", x => x.PersonId);
                     table.ForeignKey(
-                        name: "FK_Positions_Doctors_DoctorId",
-                        column: x => x.DoctorId,
-                        principalTable: "Doctors",
-                        principalColumn: "PersonId",
+                        name: "FK_Workers_Persons_PersonId",
+                        column: x => x.PersonId,
+                        principalTable: "Persons",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Positions_PositionTypes_PositionId",
-                        column: x => x.PositionId,
-                        principalTable: "PositionTypes",
+                        name: "FK_Workers_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -371,7 +346,7 @@ namespace MedicalExamination.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    DoctorId = table.Column<int>(nullable: false),
+                    WorkerId = table.Column<int>(nullable: false),
                     PatientId = table.Column<int>(nullable: false),
                     DiseaseOutcomeId = table.Column<Guid>(nullable: false),
                     ExaminationResultId = table.Column<Guid>(nullable: false),
@@ -387,12 +362,6 @@ namespace MedicalExamination.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Appointments_Doctors_DoctorId",
-                        column: x => x.DoctorId,
-                        principalTable: "Doctors",
-                        principalColumn: "PersonId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Appointments_ExaminationResultTypes_ExaminationResultId",
                         column: x => x.ExaminationResultId,
                         principalTable: "ExaminationResultTypes",
@@ -404,6 +373,37 @@ namespace MedicalExamination.Migrations
                         principalTable: "Patients",
                         principalColumn: "PersonId",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Appointments_Workers_WorkerId",
+                        column: x => x.WorkerId,
+                        principalTable: "Workers",
+                        principalColumn: "PersonId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Positions",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    WorkerId = table.Column<int>(nullable: false),
+                    PositionId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Positions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Positions_PositionTypes_PositionId",
+                        column: x => x.PositionId,
+                        principalTable: "PositionTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Positions_Workers_WorkerId",
+                        column: x => x.WorkerId,
+                        principalTable: "Workers",
+                        principalColumn: "PersonId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -411,7 +411,7 @@ namespace MedicalExamination.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    DoctorId = table.Column<int>(nullable: false),
+                    WorkerId = table.Column<int>(nullable: false),
                     PatientId = table.Column<int>(nullable: false),
                     ServiceTypeId = table.Column<Guid>(nullable: false),
                     Result = table.Column<string>(nullable: true),
@@ -421,12 +421,6 @@ namespace MedicalExamination.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ServiceHistories", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ServiceHistories_Doctors_DoctorId",
-                        column: x => x.DoctorId,
-                        principalTable: "Doctors",
-                        principalColumn: "PersonId",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ServiceHistories_Patients_PatientId",
                         column: x => x.PatientId,
@@ -438,6 +432,12 @@ namespace MedicalExamination.Migrations
                         column: x => x.ServiceTypeId,
                         principalTable: "ServiceTypes",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ServiceHistories_Workers_WorkerId",
+                        column: x => x.WorkerId,
+                        principalTable: "Workers",
+                        principalColumn: "PersonId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -473,11 +473,6 @@ namespace MedicalExamination.Migrations
                 column: "DiseaseOutcomeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Appointments_DoctorId",
-                table: "Appointments",
-                column: "DoctorId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Appointments_ExaminationResultId",
                 table: "Appointments",
                 column: "ExaminationResultId");
@@ -487,6 +482,11 @@ namespace MedicalExamination.Migrations
                 table: "Appointments",
                 column: "PatientId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointments_WorkerId",
+                table: "Appointments",
+                column: "WorkerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -528,11 +528,6 @@ namespace MedicalExamination.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Doctors_UserId",
-                table: "Doctors",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_PatientDiagnoses_AppointmentId",
                 table: "PatientDiagnoses",
                 column: "AppointmentId");
@@ -553,14 +548,14 @@ namespace MedicalExamination.Migrations
                 column: "PassportIssuePlaceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Positions_DoctorId",
-                table: "Positions",
-                column: "DoctorId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Positions_PositionId",
                 table: "Positions",
                 column: "PositionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Positions_WorkerId",
+                table: "Positions",
+                column: "WorkerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProvideServices_PositionId",
@@ -573,11 +568,6 @@ namespace MedicalExamination.Migrations
                 column: "ServiceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ServiceHistories_DoctorId",
-                table: "ServiceHistories",
-                column: "DoctorId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ServiceHistories_PatientId",
                 table: "ServiceHistories",
                 column: "PatientId");
@@ -586,6 +576,16 @@ namespace MedicalExamination.Migrations
                 name: "IX_ServiceHistories_ServiceTypeId",
                 table: "ServiceHistories",
                 column: "ServiceTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ServiceHistories_WorkerId",
+                table: "ServiceHistories",
+                column: "WorkerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Workers_UserId",
+                table: "Workers",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -636,22 +636,22 @@ namespace MedicalExamination.Migrations
                 name: "DiseaseOutcomeTypes");
 
             migrationBuilder.DropTable(
-                name: "Doctors");
-
-            migrationBuilder.DropTable(
                 name: "ExaminationResultTypes");
 
             migrationBuilder.DropTable(
                 name: "Patients");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Workers");
 
             migrationBuilder.DropTable(
                 name: "InsuranceCompanyTypes");
 
             migrationBuilder.DropTable(
                 name: "Persons");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "PassportIssuePlaceTypes");

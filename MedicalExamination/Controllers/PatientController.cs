@@ -23,7 +23,7 @@ namespace MedicalExamination.Controllers
         }
 
         [HttpPost]
-        [Route("getpatient"))]
+        [Route("getpatient")]
         public ActionResult GetPatient(int patientId)
         {
             var patient = _patientService.GetPatient(patientId);

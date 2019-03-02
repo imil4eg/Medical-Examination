@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MedicalExamination.Entities
 {
-    public sealed class Doctor
+    public sealed class Worker
     {
         [Key]
         public int PersonId { get; set; }

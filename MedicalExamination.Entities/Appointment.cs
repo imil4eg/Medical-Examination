@@ -10,9 +10,9 @@ namespace MedicalExamination.Entities
         public Guid Id { get; set; }
 
         [Required]
-        public int DoctorId { get; set; }
-        [ForeignKey("DoctorId")]
-        public Doctor Doctor { get; set; }
+        public int WorkerId { get; set; }
+        [ForeignKey("WorkerId")]
+        public Worker Worker { get; set; }
 
         [Required]
         public int PatientId { get; set; }

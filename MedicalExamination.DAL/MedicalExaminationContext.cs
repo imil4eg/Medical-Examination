@@ -23,7 +23,7 @@ namespace MedicalExamination.DAL
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<DiagnosisType> DiagnosesTypes { get; set; }
         public DbSet<DiseaseOutcomeType> DiseaseOutcomeTypes { get; set; }
-        public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<Worker> Workers { get; set; }
         public DbSet<ExaminationResultType> ExaminationResultTypes { get; set; }
         public DbSet<InsuranceCompanyType> InsuranceCompanyTypes { get; set; }
         public DbSet<PassportIssuePlaceType> PassportIssuePlaceTypes { get; set; }

@@ -105,24 +105,24 @@ namespace MedicalExamination.Migrations
 
                     b.Property<Guid>("DiseaseOutcomeId");
 
-                    b.Property<int>("DoctorId");
-
                     b.Property<DateTime>("EndDate");
 
                     b.Property<Guid>("ExaminationResultId");
 
                     b.Property<int>("PatientId");
 
+                    b.Property<int>("WorkerId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("DiseaseOutcomeId");
-
-                    b.HasIndex("DoctorId");
 
                     b.HasIndex("ExaminationResultId");
 
                     b.HasIndex("PatientId")
                         .IsUnique();
+
+                    b.HasIndex("WorkerId");
 
                     b.ToTable("Appointments");
                 });
@@ -151,19 +151,6 @@ namespace MedicalExamination.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DiseaseOutcomeTypes");
-                });
-
-            modelBuilder.Entity("MedicalExamination.Entities.Doctor", b =>
-                {
-                    b.Property<int>("PersonId");
-
-                    b.Property<Guid>("UserId");
-
-                    b.HasKey("PersonId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Doctors");
                 });
 
             modelBuilder.Entity("MedicalExamination.Entities.ExaminationResultType", b =>
@@ -283,15 +270,15 @@ namespace MedicalExamination.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("DoctorId");
-
                     b.Property<Guid>("PositionId");
+
+                    b.Property<int>("WorkerId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DoctorId");
-
                     b.HasIndex("PositionId");
+
+                    b.HasIndex("WorkerId");
 
                     b.ToTable("Positions");
                 });
@@ -334,8 +321,6 @@ namespace MedicalExamination.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<int>("DoctorId");
-
                     b.Property<int>("PatientId");
 
                     b.Property<string>("Result");
@@ -344,13 +329,15 @@ namespace MedicalExamination.Migrations
 
                     b.Property<string>("TubeNumber");
 
-                    b.HasKey("Id");
+                    b.Property<int>("WorkerId");
 
-                    b.HasIndex("DoctorId");
+                    b.HasKey("Id");
 
                     b.HasIndex("PatientId");
 
                     b.HasIndex("ServiceTypeId");
+
+                    b.HasIndex("WorkerId");
 
                     b.ToTable("ServiceHistories");
                 });
@@ -366,6 +353,19 @@ namespace MedicalExamination.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ServiceTypes");
+                });
+
+            modelBuilder.Entity("MedicalExamination.Entities.Worker", b =>
+                {
+                    b.Property<int>("PersonId");
+
+                    b.Property<Guid>("UserId");
+
+                    b.HasKey("PersonId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Workers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -458,11 +458,6 @@ namespace MedicalExamination.Migrations
                         .HasForeignKey("DiseaseOutcomeId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("MedicalExamination.Entities.Doctor", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("MedicalExamination.Entities.ExaminationResultType", "ExaminationResult")
                         .WithMany()
                         .HasForeignKey("ExaminationResultId")
@@ -472,18 +467,10 @@ namespace MedicalExamination.Migrations
                         .WithOne()
                         .HasForeignKey("MedicalExamination.Entities.Appointment", "PatientId")
                         .OnDelete(DeleteBehavior.Restrict);
-                });
 
-            modelBuilder.Entity("MedicalExamination.Entities.Doctor", b =>
-                {
-                    b.HasOne("MedicalExamination.Entities.Person", "Person")
+                    b.HasOne("MedicalExamination.Entities.Worker", "Worker")
                         .WithMany()
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("MedicalExamination.Entities.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("WorkerId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -523,14 +510,14 @@ namespace MedicalExamination.Migrations
 
             modelBuilder.Entity("MedicalExamination.Entities.Position", b =>
                 {
-                    b.HasOne("MedicalExamination.Entities.Doctor", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("MedicalExamination.Entities.PositionType", "PositionType")
                         .WithMany()
                         .HasForeignKey("PositionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("MedicalExamination.Entities.Worker", "Worker")
+                        .WithMany()
+                        .HasForeignKey("WorkerId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -549,11 +536,6 @@ namespace MedicalExamination.Migrations
 
             modelBuilder.Entity("MedicalExamination.Entities.ServiceHistory", b =>
                 {
-                    b.HasOne("MedicalExamination.Entities.Doctor", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("MedicalExamination.Entities.Patient", "Patient")
                         .WithMany()
                         .HasForeignKey("PatientId")
@@ -562,6 +544,24 @@ namespace MedicalExamination.Migrations
                     b.HasOne("MedicalExamination.Entities.ServiceType", "ServiceType")
                         .WithMany()
                         .HasForeignKey("ServiceTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("MedicalExamination.Entities.Worker", "Worker")
+                        .WithMany()
+                        .HasForeignKey("WorkerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MedicalExamination.Entities.Worker", b =>
+                {
+                    b.HasOne("MedicalExamination.Entities.Person", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("MedicalExamination.Entities.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

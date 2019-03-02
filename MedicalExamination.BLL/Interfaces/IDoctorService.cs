@@ -4,14 +4,14 @@ using MedicalExamination.Entities;
 namespace MedicalExamination.BLL
 {
     /// <summary>
-    /// Interface for <see cref="Doctor"/> entity service implementation
+    /// Interface for <see cref="Worker"/> entity service implementation
     /// </summary>
-    public interface IDoctorService
+    public interface IWorkerService
     {
-        IEnumerable<Doctor> GetAllDoctors();
-        Doctor GetDoctor(int id);
-        void CreateDoctor(Doctor doctor);
-        void UpdateDoctor(Doctor doctor);
-        void DeleteDoctor(Doctor doctor);
+        IEnumerable<Worker> GetAllWorkers();
+        Worker GetWorker(int id);
+        void CreateWorker(Worker worker);
+        void UpdateWorker(Worker worker);
+        void DeleteWorker(Worker worker);
     }
 }
