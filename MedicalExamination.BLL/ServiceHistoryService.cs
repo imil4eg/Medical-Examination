@@ -6,34 +6,34 @@ namespace MedicalExamination.BLL
 {
     public sealed class ServiceHistoryService : IServiceHistoryService
     {
-        private readonly IGenericRepository<ServiceHistory> _serviceHistoryRepository;
+        private readonly IGenericRepository<ServiceResult> _serviceHistoryRepository;
 
-        public ServiceHistoryService(IGenericRepository<ServiceHistory> serviceHistoryRepository)
+        public ServiceHistoryService(IGenericRepository<ServiceResult> serviceHistoryRepository)
         {
             _serviceHistoryRepository = serviceHistoryRepository;
         }
 
-        public IEnumerable<ServiceHistory> GetAllServiceHistories()
+        public IEnumerable<ServiceResult> GetAllServiceHistories()
         {
             return _serviceHistoryRepository.GetAll();
         }
 
-        public ServiceHistory GetServiceHistory(int id)
+        public ServiceResult GetServiceHistory(int id)
         {
             return _serviceHistoryRepository.GetById(id);
         }
 
-        public void CreateServiceHistory(ServiceHistory serviceHistory)
+        public void CreateServiceHistory(ServiceResult serviceHistory)
         {
             _serviceHistoryRepository.Insert(serviceHistory);
         }
 
-        public void UpdateServiceHistory(ServiceHistory serviceHistory)
+        public void UpdateServiceHistory(ServiceResult serviceHistory)
         {
             _serviceHistoryRepository.Update(serviceHistory);
         }
 
-        public void DeleteServiceHistory(ServiceHistory serviceHistory)
+        public void DeleteServiceHistory(ServiceResult serviceHistory)
         {
             _serviceHistoryRepository.Delete(serviceHistory);
         }

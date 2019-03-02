@@ -24,7 +24,6 @@ namespace MedicalExamination.DAL
         /// Constructor
         /// </summary>
         /// <param name="context"></param>
-        /// <param name="unitOfWork"></param>
         protected GenericRepository(MedicalExaminationContext context)
         {
             this._context = context;
@@ -45,7 +44,7 @@ namespace MedicalExamination.DAL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public TEntity GetById(int id)
+        public TEntity GetById<TValue>(TValue id)
         {
             return _entities.Find(id);
         }
@@ -57,6 +56,7 @@ namespace MedicalExamination.DAL
         public TEntity Insert(TEntity entity)
         {
             var result = _entities.Add(entity);
+            SaveChanges();
             return result.Entity;
         }
 
@@ -67,6 +67,7 @@ namespace MedicalExamination.DAL
         public void Update(TEntity entity)
         {
             _entities.Update(entity);
+            SaveChanges();
         }
 
         /// <summary>
@@ -76,6 +77,7 @@ namespace MedicalExamination.DAL
         public void Delete(TEntity entity)
         {
             _entities.Remove(entity);
+            SaveChanges();
         }
 
         /// <summary>

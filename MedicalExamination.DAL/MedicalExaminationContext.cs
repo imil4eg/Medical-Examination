@@ -34,7 +34,7 @@ namespace MedicalExamination.DAL
         public DbSet<PositionType> PositionTypes { get; set; }
         public DbSet<ProvideService> ProvideServices { get; set; }
         public DbSet<ServiceType> ServiceTypes { get; set; }
-        public DbSet<ServiceHistory> ServiceHistories { get; set; }
+        public DbSet<ServiceResult> ServiceResults { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

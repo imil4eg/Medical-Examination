@@ -3,9 +3,9 @@
 namespace MedicalExamination.DAL
 {
     /// <summary>
-    /// Repository for <see cref="ServiceHistory"/>
+    /// Repository for <see cref="ServiceResult"/>
     /// </summary>
-    public sealed class ServiceHistoryRepository : GenericRepository<ServiceHistory>
+    public sealed class ServiceHistoryRepository : GenericRepository<ServiceResult>
     {
         public ServiceHistoryRepository(MedicalExaminationContext context) : base(context)
         {

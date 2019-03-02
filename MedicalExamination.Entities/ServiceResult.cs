@@ -4,18 +4,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MedicalExamination.Entities
 {
-    public sealed class ServiceHistory
+    public sealed class ServiceResult
     {
         [Key]
         public Guid Id { get; set; }
 
-        public int WorkerId { get; set; }
-        [ForeignKey("WorkerId")]
-        public Worker Worker { get; set; }
-
-        public int PatientId { get; set; }
-        [ForeignKey("PatientId")]
-        public Patient Patient { get; set; }
+        public Guid AppointmentId { get; set; }
+        [ForeignKey("AppointmentId")]
+        public Appointment Appointment { get; set; }
 
         public Guid ServiceTypeId { get; set; }
         [ForeignKey("ServiceTypeId")]

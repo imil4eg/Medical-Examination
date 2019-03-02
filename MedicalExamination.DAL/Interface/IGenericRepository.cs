@@ -9,7 +9,7 @@ namespace MedicalExamination.DAL
     public interface IGenericRepository<TEntity> : IRepository where TEntity : class
     {
         IEnumerable<TEntity> GetAll();
-        TEntity GetById(int id);
+        TEntity GetById<TValue>(TValue id);
         TEntity Insert(TEntity entity);
         void Update(TEntity entity);
         void Delete(TEntity entity);

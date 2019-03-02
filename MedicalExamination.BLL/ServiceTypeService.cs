@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MedicalExamination.DAL;
 using MedicalExamination.Entities;
 
@@ -18,24 +19,31 @@ namespace MedicalExamination.BLL
             return _serviceTypeRepository.GetAll();
         }
 
-        public ServiceType GetServiceType(int id)
+        public ServiceType GetServiceType(Guid id)
         {
             return _serviceTypeRepository.GetById(id);
         }
 
-        public void CreateServiceType(ServiceType serviceType)
+        public void CreateServiceType(ServiceTypeModel serviceTypeModel)
         {
+            var serviceType = SimpleMapper.Mapper.Map<ServiceTypeModel, ServiceType>(serviceTypeModel);
+
             _serviceTypeRepository.Insert(serviceType);
         }
 
-        public void UpdateServiceType(ServiceType serviceHistory)
+        public void UpdateServiceType(ServiceTypeModel serviceTypeModel)
         {
-            _serviceTypeRepository.Update(serviceHistory);
+
+            var serviceType = SimpleMapper.Mapper.Map<ServiceTypeModel, ServiceType>(serviceTypeModel);
+
+            _serviceTypeRepository.Update(serviceType);
         }
 
-        public void DeleteServiceType(ServiceType serviceHistory)
+        public void DeleteServiceType(ServiceTypeModel serviceTypeModel)
         {
-            _serviceTypeRepository.Delete(serviceHistory);
+            var serviceType = SimpleMapper.Mapper.Map<ServiceTypeModel, ServiceType>(serviceTypeModel);
+
+            _serviceTypeRepository.Delete(serviceType);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MedicalExamination.Entities;
 
 namespace MedicalExamination.BLL
@@ -9,9 +10,9 @@ namespace MedicalExamination.BLL
     public interface IServiceTypeService
     {
         IEnumerable<ServiceType> GetAllAServiceTypes();
-        ServiceType GetServiceType(int id);
-        void CreateServiceType(ServiceType serviceType);
-        void UpdateServiceType(ServiceType serviceHistory);
-        void DeleteServiceType(ServiceType serviceHistory);
+        ServiceType GetServiceType(Guid id);
+        void CreateServiceType(ServiceTypeModel serviceTypeModel);
+        void UpdateServiceType(ServiceTypeModel serviceTypeModel);
+        void DeleteServiceType(ServiceTypeModel serviceTypeModel);
     }
 }

@@ -4,14 +4,14 @@ using MedicalExamination.Entities;
 namespace MedicalExamination.BLL
 {
     /// <summary>
-    /// Interface for <see cref="ServiceHistory"/> entity service implementation
+    /// Interface for <see cref="ServiceResult"/> entity service implementation
     /// </summary>
     public interface IServiceHistoryService
     {
-        IEnumerable<ServiceHistory> GetAllServiceHistories();
-        ServiceHistory GetServiceHistory(int id);
-        void CreateServiceHistory(ServiceHistory serviceHistory);
-        void UpdateServiceHistory(ServiceHistory serviceHistory);
-        void DeleteServiceHistory(ServiceHistory serviceHistory);
+        IEnumerable<ServiceResult> GetAllServiceHistories();
+        ServiceResult GetServiceHistory(int id);
+        void CreateServiceHistory(ServiceResult serviceHistory);
+        void UpdateServiceHistory(ServiceResult serviceHistory);
+        void DeleteServiceHistory(ServiceResult serviceHistory);
     }
 }

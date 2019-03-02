@@ -23,7 +23,7 @@ namespace MedicalExamination.Controllers
             return Ok(workers);
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("getworker")]
         public ActionResult GetWorker(int workerId)
         {
@@ -32,6 +32,19 @@ namespace MedicalExamination.Controllers
             return Ok(worker);
         }
 
-        //public ActionResult CreateDoctor()
+        [HttpPost]
+        public ActionResult CreateWorker(WorkerModel model)
+        {
+            try
+            {
+
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
