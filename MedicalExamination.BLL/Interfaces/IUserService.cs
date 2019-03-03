@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MedicalExamination.Entities;
 
 namespace MedicalExamination.BLL
@@ -9,9 +10,9 @@ namespace MedicalExamination.BLL
     public interface IUserService
     {
         IEnumerable<ApplicationUser> GetAllUsers();
-        ApplicationUser GetUserById(int id);
-        void CreateUser(ApplicationUser user);
-        void UpdateUser(ApplicationUser user);
-        void DeleteUser(ApplicationUser user);
+        ApplicationUser GetUserById(Guid id);
+        void CreateUser(UserModel userModel);
+        void UpdateUser(UserModel userModel);
+        void DeleteUser(UserModel userModel);
     }
 }
