@@ -87,26 +87,5 @@ namespace MedicalExamination.Controllers
                 return BadRequest(ex.InnerException.Message);
             }
         }
-
-        [HttpPut]
-        [Route("adduser")]
-        public ActionResult RelateUserToWorker([FromBody] WorkerModel model)
-        {
-            try
-            {
-                var worker = SimpleMapper.Mapper.Map<WorkerModel, MedicalExamination.BLL.WorkerModel>(model);
-                worker.Person = SimpleMapper.Mapper.Map<PersonModel, MedicalExamination.BLL.PersonModel>(model.Person);
-                worker.User = SimpleMapper.Mapper.Map<UserModel, MedicalExamination.BLL.UserModel>(model.User);
-
-                _workerService.RelateUserToWorker(worker);
-
-                return Ok();
-
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.InnerException.Message);
-            }
-        }
     }
 }

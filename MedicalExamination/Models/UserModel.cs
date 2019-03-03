@@ -14,5 +14,8 @@ namespace MedicalExamination
 
         [DataMember(Name = "password")]
         public string Password { get; set; }
+
+        [DataMember(Name = "worker")]
+        public WorkerModel Worker { get; set; }
     }
 }

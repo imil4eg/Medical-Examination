@@ -9,5 +9,7 @@ namespace MedicalExamination.BLL
         public string UserName { get; set; }
 
         public string Password { get; set; }
+
+        public WorkerModel Worker { get; set; }
     }
 }
