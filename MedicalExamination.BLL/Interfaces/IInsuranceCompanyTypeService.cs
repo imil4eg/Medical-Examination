@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MedicalExamination.Entities;
 
 namespace MedicalExamination.BLL
@@ -9,9 +10,9 @@ namespace MedicalExamination.BLL
     public interface IInsuranceCompanyTypeService
     {
         IEnumerable<InsuranceCompanyType> GetAllInsuranceCompanyTypes();
-        InsuranceCompanyType GetInsuranceCompanyType(int id);
-        void CreateInsuranceCompanyType(InsuranceCompanyType insuranceCompanyType);
-        void UpdateInsuranceCompanyType(InsuranceCompanyType insuranceCompanyType);
-        void DeleteInsuranceCompanyType(InsuranceCompanyType insuranceCompanyType);
+        InsuranceCompanyType GetInsuranceCompanyType(Guid id);
+        void CreateInsuranceCompanyType(InsuranceCompanyModel insuranceCompanyModel);
+        void UpdateInsuranceCompanyType(InsuranceCompanyModel insuranceCompanyModel);
+        void DeleteInsuranceCompanyType(InsuranceCompanyModel insuranceCompanyModel);
     }
 }

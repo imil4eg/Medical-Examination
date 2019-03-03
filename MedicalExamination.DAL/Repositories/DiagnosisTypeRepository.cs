@@ -5,9 +5,9 @@ namespace MedicalExamination.DAL
     /// <summary>
     /// Repository for <see cref="DiagnosisType"/>
     /// </summary>
-    public sealed class DiagnosesTypeRepository : GenericRepository<DiagnosisType>
+    public sealed class DiagnosisTypeRepository : GenericRepository<DiagnosisType>
     {
-        public DiagnosesTypeRepository(MedicalExaminationContext context) : base(context)
+        public DiagnosisTypeRepository(MedicalExaminationContext context) : base(context)
         {
         }
     }

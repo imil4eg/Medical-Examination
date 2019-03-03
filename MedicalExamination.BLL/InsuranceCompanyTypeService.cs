@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MedicalExamination.DAL;
 using MedicalExamination.Entities;
 
@@ -18,23 +19,32 @@ namespace MedicalExamination.BLL
             return _insuranceCompanyTypeRepository.GetAll();
         }
 
-        public InsuranceCompanyType GetInsuranceCompanyType(int id)
+        public InsuranceCompanyType GetInsuranceCompanyType(Guid id)
         {
             return _insuranceCompanyTypeRepository.GetById(id);
         }
 
-        public void CreateInsuranceCompanyType(InsuranceCompanyType insuranceCompanyType)
+        public void CreateInsuranceCompanyType(InsuranceCompanyModel insuranceCompanyModel)
         {
+            var insuranceCompanyType =
+                SimpleMapper.Mapper.Map<InsuranceCompanyModel, InsuranceCompanyType>(insuranceCompanyModel);
+
             _insuranceCompanyTypeRepository.Insert(insuranceCompanyType);
         }
 
-        public void UpdateInsuranceCompanyType(InsuranceCompanyType insuranceCompanyType)
+        public void UpdateInsuranceCompanyType(InsuranceCompanyModel insuranceCompanyModel)
         {
+            var insuranceCompanyType =
+                SimpleMapper.Mapper.Map<InsuranceCompanyModel, InsuranceCompanyType>(insuranceCompanyModel);
+
             _insuranceCompanyTypeRepository.Update(insuranceCompanyType);
         }
 
-        public void DeleteInsuranceCompanyType(InsuranceCompanyType insuranceCompanyType)
+        public void DeleteInsuranceCompanyType(InsuranceCompanyModel insuranceCompanyModel)
         {
+            var insuranceCompanyType =
+                SimpleMapper.Mapper.Map<InsuranceCompanyModel, InsuranceCompanyType>(insuranceCompanyModel);
+
             _insuranceCompanyTypeRepository.Delete(insuranceCompanyType);
         }
     }

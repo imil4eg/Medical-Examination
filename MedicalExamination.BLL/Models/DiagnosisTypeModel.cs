@@ -1,11 +1,6 @@
-﻿using System;
-
-namespace MedicalExamination.BLL
+﻿namespace MedicalExamination.BLL
 {
-    public sealed class DiagnosisTypeModel
+    public sealed class DiagnosisTypeModel : BaseModel
     {
-        public Guid Id { get; set; }
-
-        public string Name { get; set; }
     }
 }
