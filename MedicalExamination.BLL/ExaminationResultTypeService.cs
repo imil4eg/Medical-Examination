@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MedicalExamination.DAL;
 using MedicalExamination.Entities;
 
@@ -18,23 +19,32 @@ namespace MedicalExamination.BLL
             return _examinationResultTypeRepository.GetAll();
         }
 
-        public ExaminationResultType GetExaminationResultType(int id)
+        public ExaminationResultType GetExaminationResultType(Guid id)
         {
             return _examinationResultTypeRepository.GetById(id);
         }
 
-        public void CreateExaminationResultType(ExaminationResultType examinationResultType)
+        public void CreateExaminationResultType(ExaminationResultModel examinationResultModel)
         {
+            var examinationResultType =
+                SimpleMapper.Mapper.Map<ExaminationResultModel, ExaminationResultType>(examinationResultModel);
+
             _examinationResultTypeRepository.Insert(examinationResultType);
         }
 
-        public void UpdateExaminationResultType(ExaminationResultType examinationResultType)
+        public void UpdateExaminationResultType(ExaminationResultModel examinationResultModel)
         {
+            var examinationResultType =
+                SimpleMapper.Mapper.Map<ExaminationResultModel, ExaminationResultType>(examinationResultModel);
+
             _examinationResultTypeRepository.Update(examinationResultType);
         }
 
-        public void DeleteExaminationResultType(ExaminationResultType examinationResultType)
+        public void DeleteExaminationResultType(ExaminationResultModel examinationResultModel)
         {
+            var examinationResultType =
+                SimpleMapper.Mapper.Map<ExaminationResultModel, ExaminationResultType>(examinationResultModel);
+
             _examinationResultTypeRepository.Delete(examinationResultType);
         }
     }

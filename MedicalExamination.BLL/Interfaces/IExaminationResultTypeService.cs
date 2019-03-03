@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MedicalExamination.Entities;
 
 namespace MedicalExamination.BLL
@@ -9,9 +10,9 @@ namespace MedicalExamination.BLL
     public interface IExaminationResultTypeService
     {
         IEnumerable<ExaminationResultType> GetAllExaminationResultTypes();
-        ExaminationResultType GetExaminationResultType(int id);
-        void CreateExaminationResultType(ExaminationResultType examinationResultType);
-        void UpdateExaminationResultType(ExaminationResultType examinationResultType);
-        void DeleteExaminationResultType(ExaminationResultType examinationResultType);
+        ExaminationResultType GetExaminationResultType(Guid id);
+        void CreateExaminationResultType(ExaminationResultModel examinationResultModel);
+        void UpdateExaminationResultType(ExaminationResultModel examinationResultModel);
+        void DeleteExaminationResultType(ExaminationResultModel examinationResultModel);
     }
 }
