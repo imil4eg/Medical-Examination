@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MedicalExamination.Entities;
 
 namespace MedicalExamination.BLL
@@ -9,9 +10,9 @@ namespace MedicalExamination.BLL
     public interface IDiagnosisTypeService
     {
         IEnumerable<DiagnosisType> GetAllDiagnoseTypes();
-        DiagnosisType GetDiagnoseType(int id);
-        void CreateDiagnoseType(DiagnosisType diagnoseType);
-        void UpdateDiagnoseType(DiagnosisType diagnoseType);
-        void DeleteDiagnoseType(DiagnosisType diagnoseType);
+        DiagnosisType GetDiagnoseType(Guid id);
+        void CreateDiagnoseType(DiagnosisTypeModel diagnoseTypeModel);
+        void UpdateDiagnoseType(DiagnosisTypeModel diagnoseTypeModel);
+        void DeleteDiagnoseType(DiagnosisTypeModel diagnoseTypeModel);
     }
 }
