@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MedicalExamination.DAL;
 using MedicalExamination.Entities;
 
@@ -18,23 +19,32 @@ namespace MedicalExamination.BLL
             return _diseaseOutcomeTypeRepository.GetAll();
         }
 
-        public DiseaseOutcomeType GetDiseaseOutcomeType(int id)
+        public DiseaseOutcomeType GetDiseaseOutcomeType(Guid id)
         {
             return _diseaseOutcomeTypeRepository.GetById(id);
         }
 
-        public void CreateDiseaseOutcomeType(DiseaseOutcomeType diseaseOutcomeType)
+        public void CreateDiseaseOutcomeType(DiseaseOutcomeModel diseaseOutcomeModel)
         {
+            var diseaseOutcomeType =
+                SimpleMapper.Mapper.Map<DiseaseOutcomeModel, DiseaseOutcomeType>(diseaseOutcomeModel);
+
             _diseaseOutcomeTypeRepository.Insert(diseaseOutcomeType);
         }
 
-        public void UpdateDiseaseOutcomeType(DiseaseOutcomeType diseaseOutcomeType)
+        public void UpdateDiseaseOutcomeType(DiseaseOutcomeModel diseaseOutcomeModel)
         {
+            var diseaseOutcomeType =
+                SimpleMapper.Mapper.Map<DiseaseOutcomeModel, DiseaseOutcomeType>(diseaseOutcomeModel);
+
             _diseaseOutcomeTypeRepository.Update(diseaseOutcomeType);
         }
 
-        public void DeleteDiseaseOutcomeType(DiseaseOutcomeType diseaseOutcomeType)
+        public void DeleteDiseaseOutcomeType(DiseaseOutcomeModel diseaseOutcomeModel)
         {
+            var diseaseOutcomeType =
+                SimpleMapper.Mapper.Map<DiseaseOutcomeModel, DiseaseOutcomeType>(diseaseOutcomeModel);
+
             _diseaseOutcomeTypeRepository.Delete(diseaseOutcomeType);
         }
     }
