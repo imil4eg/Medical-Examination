@@ -56,5 +56,15 @@ namespace MedicalExamination.BLL
 
             _workerRepository.Delete(worker);
         }
+
+        public void RelateUserToWorker(WorkerModel workerModel)
+        {
+            var worker = SimpleMapper.Mapper.Map<WorkerModel, Worker>(workerModel);
+            var person = SimpleMapper.Mapper.Map<PersonModel, Person>(workerModel.Person);
+            worker.PersonId = person.Id;
+            worker.Person = person;
+
+            _workerRepository.Update(worker);
+        }
     }
 }

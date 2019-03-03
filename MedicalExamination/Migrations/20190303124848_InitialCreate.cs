@@ -23,32 +23,6 @@ namespace MedicalExamination.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    SecurityStamp = table.Column<string>(nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: false),
-                    Password = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "DiagnosesTypes",
                 columns: table => new
                 {
@@ -154,6 +128,254 @@ namespace MedicalExamination.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Persons",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    LastName = table.Column<string>(nullable: false),
+                    FirstName = table.Column<string>(nullable: false),
+                    MiddleName = table.Column<string>(nullable: true),
+                    Gender = table.Column<int>(nullable: false),
+                    BirthDate = table.Column<DateTime>(nullable: false),
+                    INN = table.Column<string>(nullable: true),
+                    SNILS = table.Column<string>(nullable: true),
+                    PassportNumber = table.Column<string>(nullable: true),
+                    PassportSeries = table.Column<string>(nullable: true),
+                    PassportIssueDate = table.Column<DateTime>(nullable: false),
+                    PassportIssuePlaceId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Persons", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Persons_PassportIssuePlaceTypes_PassportIssuePlaceId",
+                        column: x => x.PassportIssuePlaceId,
+                        principalTable: "PassportIssuePlaceTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProvideServices",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    PositionId = table.Column<Guid>(nullable: false),
+                    ServiceId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProvideServices", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProvideServices_PositionTypes_PositionId",
+                        column: x => x.PositionId,
+                        principalTable: "PositionTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProvideServices_ServiceTypes_ServiceId",
+                        column: x => x.ServiceId,
+                        principalTable: "ServiceTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Patients",
+                columns: table => new
+                {
+                    PersonId = table.Column<int>(nullable: false),
+                    InsuranceNumber = table.Column<string>(nullable: false),
+                    InsuranceCompanyId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Patients", x => x.PersonId);
+                    table.ForeignKey(
+                        name: "FK_Patients_InsuranceCompanyTypes_InsuranceCompanyId",
+                        column: x => x.InsuranceCompanyId,
+                        principalTable: "InsuranceCompanyTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Patients_Persons_PersonId",
+                        column: x => x.PersonId,
+                        principalTable: "Persons",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Workers",
+                columns: table => new
+                {
+                    PersonId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Workers", x => x.PersonId);
+                    table.ForeignKey(
+                        name: "FK_Workers_Persons_PersonId",
+                        column: x => x.PersonId,
+                        principalTable: "Persons",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Appointments",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    WorkerId = table.Column<int>(nullable: false),
+                    PatientId = table.Column<int>(nullable: false),
+                    DiseaseOutcomeId = table.Column<Guid>(nullable: false),
+                    ExaminationResultId = table.Column<Guid>(nullable: false),
+                    EndDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Appointments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Appointments_DiseaseOutcomeTypes_DiseaseOutcomeId",
+                        column: x => x.DiseaseOutcomeId,
+                        principalTable: "DiseaseOutcomeTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Appointments_ExaminationResultTypes_ExaminationResultId",
+                        column: x => x.ExaminationResultId,
+                        principalTable: "ExaminationResultTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Appointments_Patients_PatientId",
+                        column: x => x.PatientId,
+                        principalTable: "Patients",
+                        principalColumn: "PersonId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Appointments_Workers_WorkerId",
+                        column: x => x.WorkerId,
+                        principalTable: "Workers",
+                        principalColumn: "PersonId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
+                    Email = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
+                    PasswordHash = table.Column<string>(nullable: true),
+                    SecurityStamp = table.Column<string>(nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    UserName = table.Column<string>(maxLength: 256, nullable: false),
+                    Password = table.Column<string>(nullable: false),
+                    WorkerId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_Workers_WorkerId",
+                        column: x => x.WorkerId,
+                        principalTable: "Workers",
+                        principalColumn: "PersonId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Positions",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    WorkerId = table.Column<int>(nullable: false),
+                    PositionId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Positions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Positions_PositionTypes_PositionId",
+                        column: x => x.PositionId,
+                        principalTable: "PositionTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Positions_Workers_WorkerId",
+                        column: x => x.WorkerId,
+                        principalTable: "Workers",
+                        principalColumn: "PersonId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PatientDiagnoses",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    AppointmentId = table.Column<Guid>(nullable: false),
+                    DiagnosisId = table.Column<Guid>(nullable: false),
+                    IsMain = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PatientDiagnoses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PatientDiagnoses_Appointments_AppointmentId",
+                        column: x => x.AppointmentId,
+                        principalTable: "Appointments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PatientDiagnoses_DiagnosesTypes_DiagnosisId",
+                        column: x => x.DiagnosisId,
+                        principalTable: "DiagnosesTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ServiceResults",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    AppointmentId = table.Column<Guid>(nullable: false),
+                    ServiceTypeId = table.Column<Guid>(nullable: false),
+                    Result = table.Column<string>(nullable: true),
+                    TubeNumber = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ServiceResults", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ServiceResults_Appointments_AppointmentId",
+                        column: x => x.AppointmentId,
+                        principalTable: "Appointments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ServiceResults_ServiceTypes_ServiceTypeId",
+                        column: x => x.ServiceTypeId,
+                        principalTable: "ServiceTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
@@ -238,235 +460,6 @@ namespace MedicalExamination.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Persons",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    LastName = table.Column<string>(nullable: false),
-                    FirstName = table.Column<string>(nullable: false),
-                    MiddleName = table.Column<string>(nullable: true),
-                    Gender = table.Column<int>(nullable: false),
-                    BirthDate = table.Column<DateTime>(nullable: false),
-                    INN = table.Column<string>(nullable: true),
-                    SNILS = table.Column<string>(nullable: true),
-                    PassportNumber = table.Column<string>(nullable: true),
-                    PassportSeries = table.Column<string>(nullable: true),
-                    PassportIssueDate = table.Column<DateTime>(nullable: false),
-                    PassportIssuePlaceId = table.Column<Guid>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Persons", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Persons_PassportIssuePlaceTypes_PassportIssuePlaceId",
-                        column: x => x.PassportIssuePlaceId,
-                        principalTable: "PassportIssuePlaceTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProvideServices",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    PositionId = table.Column<Guid>(nullable: false),
-                    ServiceId = table.Column<Guid>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProvideServices", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ProvideServices_PositionTypes_PositionId",
-                        column: x => x.PositionId,
-                        principalTable: "PositionTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProvideServices_ServiceTypes_ServiceId",
-                        column: x => x.ServiceId,
-                        principalTable: "ServiceTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Patients",
-                columns: table => new
-                {
-                    PersonId = table.Column<int>(nullable: false),
-                    InsuranceNumber = table.Column<string>(nullable: false),
-                    InsuranceCompanyId = table.Column<Guid>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Patients", x => x.PersonId);
-                    table.ForeignKey(
-                        name: "FK_Patients_InsuranceCompanyTypes_InsuranceCompanyId",
-                        column: x => x.InsuranceCompanyId,
-                        principalTable: "InsuranceCompanyTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Patients_Persons_PersonId",
-                        column: x => x.PersonId,
-                        principalTable: "Persons",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Workers",
-                columns: table => new
-                {
-                    PersonId = table.Column<int>(nullable: false),
-                    UserId = table.Column<Guid>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Workers", x => x.PersonId);
-                    table.ForeignKey(
-                        name: "FK_Workers_Persons_PersonId",
-                        column: x => x.PersonId,
-                        principalTable: "Persons",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Workers_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Appointments",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    WorkerId = table.Column<int>(nullable: false),
-                    PatientId = table.Column<int>(nullable: false),
-                    DiseaseOutcomeId = table.Column<Guid>(nullable: false),
-                    ExaminationResultId = table.Column<Guid>(nullable: false),
-                    EndDate = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Appointments", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Appointments_DiseaseOutcomeTypes_DiseaseOutcomeId",
-                        column: x => x.DiseaseOutcomeId,
-                        principalTable: "DiseaseOutcomeTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Appointments_ExaminationResultTypes_ExaminationResultId",
-                        column: x => x.ExaminationResultId,
-                        principalTable: "ExaminationResultTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Appointments_Patients_PatientId",
-                        column: x => x.PatientId,
-                        principalTable: "Patients",
-                        principalColumn: "PersonId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Appointments_Workers_WorkerId",
-                        column: x => x.WorkerId,
-                        principalTable: "Workers",
-                        principalColumn: "PersonId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Positions",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    WorkerId = table.Column<int>(nullable: false),
-                    PositionId = table.Column<Guid>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Positions", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Positions_PositionTypes_PositionId",
-                        column: x => x.PositionId,
-                        principalTable: "PositionTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Positions_Workers_WorkerId",
-                        column: x => x.WorkerId,
-                        principalTable: "Workers",
-                        principalColumn: "PersonId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ServiceHistories",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    WorkerId = table.Column<int>(nullable: false),
-                    PatientId = table.Column<int>(nullable: false),
-                    ServiceTypeId = table.Column<Guid>(nullable: false),
-                    Result = table.Column<string>(nullable: true),
-                    TubeNumber = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ServiceHistories", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ServiceHistories_Patients_PatientId",
-                        column: x => x.PatientId,
-                        principalTable: "Patients",
-                        principalColumn: "PersonId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ServiceHistories_ServiceTypes_ServiceTypeId",
-                        column: x => x.ServiceTypeId,
-                        principalTable: "ServiceTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ServiceHistories_Workers_WorkerId",
-                        column: x => x.WorkerId,
-                        principalTable: "Workers",
-                        principalColumn: "PersonId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PatientDiagnoses",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    AppointmentId = table.Column<Guid>(nullable: false),
-                    DiagnosisId = table.Column<Guid>(nullable: false),
-                    IsMain = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PatientDiagnoses", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PatientDiagnoses_Appointments_AppointmentId",
-                        column: x => x.AppointmentId,
-                        principalTable: "Appointments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PatientDiagnoses_DiagnosesTypes_DiagnosisId",
-                        column: x => x.DiagnosisId,
-                        principalTable: "DiagnosesTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Appointments_DiseaseOutcomeId",
                 table: "Appointments",
@@ -528,6 +521,12 @@ namespace MedicalExamination.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_WorkerId",
+                table: "AspNetUsers",
+                column: "WorkerId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PatientDiagnoses_AppointmentId",
                 table: "PatientDiagnoses",
                 column: "AppointmentId");
@@ -568,24 +567,14 @@ namespace MedicalExamination.Migrations
                 column: "ServiceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ServiceHistories_PatientId",
-                table: "ServiceHistories",
-                column: "PatientId");
+                name: "IX_ServiceResults_AppointmentId",
+                table: "ServiceResults",
+                column: "AppointmentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ServiceHistories_ServiceTypeId",
-                table: "ServiceHistories",
+                name: "IX_ServiceResults_ServiceTypeId",
+                table: "ServiceResults",
                 column: "ServiceTypeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ServiceHistories_WorkerId",
-                table: "ServiceHistories",
-                column: "WorkerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Workers_UserId",
-                table: "Workers",
-                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -615,19 +604,22 @@ namespace MedicalExamination.Migrations
                 name: "ProvideServices");
 
             migrationBuilder.DropTable(
-                name: "ServiceHistories");
+                name: "ServiceResults");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Appointments");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "DiagnosesTypes");
 
             migrationBuilder.DropTable(
                 name: "PositionTypes");
+
+            migrationBuilder.DropTable(
+                name: "Appointments");
 
             migrationBuilder.DropTable(
                 name: "ServiceTypes");
@@ -649,9 +641,6 @@ namespace MedicalExamination.Migrations
 
             migrationBuilder.DropTable(
                 name: "Persons");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "PassportIssuePlaceTypes");

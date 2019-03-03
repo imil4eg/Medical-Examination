@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 
 namespace MedicalExamination.Entities
@@ -16,5 +17,9 @@ namespace MedicalExamination.Entities
         
         [Required]
         public string Password { get; set; }
+
+        public int WorkerId { get; set; }
+        [ForeignKey("WorkerId")]
+        public Worker Worker { get; set; }
     }
 }

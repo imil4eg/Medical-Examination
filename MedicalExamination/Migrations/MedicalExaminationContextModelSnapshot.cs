@@ -85,6 +85,8 @@ namespace MedicalExamination.Migrations
                         .IsRequired()
                         .HasMaxLength(256);
 
+                    b.Property<int>("WorkerId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -94,6 +96,9 @@ namespace MedicalExamination.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("WorkerId")
+                        .IsUnique();
 
                     b.ToTable("AspNetUsers");
                 });
@@ -355,13 +360,7 @@ namespace MedicalExamination.Migrations
                 {
                     b.Property<int>("PersonId");
 
-                    b.Property<Guid?>("UserId");
-
                     b.HasKey("PersonId");
-
-                    b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Workers");
                 });
@@ -447,6 +446,14 @@ namespace MedicalExamination.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("MedicalExamination.Entities.ApplicationUser", b =>
+                {
+                    b.HasOne("MedicalExamination.Entities.Worker", "Worker")
+                        .WithOne()
+                        .HasForeignKey("MedicalExamination.Entities.ApplicationUser", "WorkerId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("MedicalExamination.Entities.Appointment", b =>
@@ -551,10 +558,6 @@ namespace MedicalExamination.Migrations
                         .WithMany()
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("MedicalExamination.Entities.ApplicationUser", "User")
-                        .WithOne()
-                        .HasForeignKey("MedicalExamination.Entities.Worker", "UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>

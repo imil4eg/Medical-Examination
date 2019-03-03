@@ -13,5 +13,6 @@ namespace MedicalExamination.BLL
         void CreateWorker(WorkerModel workerModel);
         void UpdateWorker(WorkerModel workerModel);
         void DeleteWorker(WorkerModel workerModel);
+        void RelateUserToWorker(WorkerModel workerModel);
     }
 }

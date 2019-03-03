@@ -25,10 +25,10 @@ namespace MedicalExamination
         public async Task Initialize()
         {
             //_context.Database.EnsureCreated();
-            await InitRoles();
-            await InitUsers();
             InitPassportIssuePlaceType();
             InitInsuranceCompanyType();
+            await InitRoles();
+            await InitUsers();
             InitPatients();
         }
 
@@ -39,10 +39,40 @@ namespace MedicalExamination
                 return;
             }
 
+            var passportIssuePlaceType = _context.PassportIssuePlaceTypes.ToList()[0];
+
+            var person = new Person
+            {
+                BirthDate = DateTime.Now,
+                FirstName = "Test",
+                LastName = "Test",
+                Gender = Gender.Female,
+                INN = "32228",
+                MiddleName = "test",
+                PassportIssueDate = DateTime.Now,
+                PassportIssuePlaceId = passportIssuePlaceType.Id,
+                PassportNumber = "436463",
+                PassportSeries = "543534",
+                SNILS = "54353453453"
+            };
+
+            var createdPerson = _context.Persons.Add(person);
+            _context.SaveChanges();
+
+            var worker = new Worker
+            {
+                PersonId = createdPerson.Entity.Id
+            };
+
+            var createdWorker = _context.Workers.Add(worker);
+            _context.SaveChanges();
+
             var testUser = new ApplicationUser
             {
                 UserName = "Test",
-                Password = "TestTest1,"
+                Password = "TestTest1,",
+                WorkerId = worker.PersonId,
+                Worker = worker
             };
 
             var createTestUser = await _userManager.CreateAsync(testUser, testUser.Password);

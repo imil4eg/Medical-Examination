@@ -1,6 +1,5 @@
 ﻿using System;
 using MedicalExamination.Entities;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -45,7 +44,9 @@ namespace MedicalExamination.DAL
 
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Worker>().HasOne(w => w.User).WithOne().IsRequired(false);
+            modelBuilder.Entity<Worker>().HasKey(w => w.PersonId);
+            modelBuilder.Entity<ApplicationUser>().HasOne(u => u.Worker).WithOne();
+            //modelBuilder.Entity<Worker>().HasOne(e => e.User).WithOne().HasForeignKey<ApplicationUser>();
             modelBuilder.Entity<Patient>().HasOne(p => p.Person).WithOne().OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<Appointment>().HasOne(p => p.Patient).WithOne().OnDelete(DeleteBehavior.Restrict);
         }

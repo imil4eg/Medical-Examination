@@ -7,7 +7,7 @@ namespace MedicalExamination
     public sealed class UserModel
     {
         [DataMember(Name = "id")]
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
 
         [DataMember(Name = "username")]
         public string UserName { get; set; }
