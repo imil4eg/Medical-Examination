@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using MedicalExamination.DAL;
 using MedicalExamination.Entities;
 
@@ -13,28 +15,42 @@ namespace MedicalExamination.BLL
             _patientDiagnosisRepository = patientDiagnosisRepository;
         }
 
-        public IEnumerable<PatientDiagnosis> GetAllPatientDiagnoses()
+        public IEnumerable<PatientDiagnosis> GetAllPatientDiagnosis()
         {
             return _patientDiagnosisRepository.GetAll();
         }
 
-        public PatientDiagnosis GetPatientDiagnosis(int id)
+        public IEnumerable<PatientDiagnosis> GetAllAppointmentDiagnosis(Guid appointmentId)
+        {
+            return _patientDiagnosisRepository.GetAll().Where(pd => pd.AppointmentId == appointmentId);
+        }
+
+        public PatientDiagnosis GetPatientDiagnosis(Guid id)
         {
             return _patientDiagnosisRepository.GetById(id);
         }
 
-        public void CreatePatientDiagnosis(PatientDiagnosis patientDiagnosis)
+        public void CreatePatientDiagnosis(PatientDiagnosisModel patientDiagnosisModel)
         {
+            var patientDiagnosis =
+                SimpleMapper.Mapper.Map<PatientDiagnosisModel, PatientDiagnosis>(patientDiagnosisModel);
+
             _patientDiagnosisRepository.Insert(patientDiagnosis);
         }
 
-        public void UpdatePatientDiagnosis(PatientDiagnosis patientDiagnosis)
+        public void UpdatePatientDiagnosis(PatientDiagnosisModel patientDiagnosisModel)
         {
+            var patientDiagnosis =
+                SimpleMapper.Mapper.Map<PatientDiagnosisModel, PatientDiagnosis>(patientDiagnosisModel);
+
             _patientDiagnosisRepository.Update(patientDiagnosis);
         }
 
-        public void DeletePatientDiagnosis(PatientDiagnosis patientDiagnosis)
+        public void DeletePatientDiagnosis(PatientDiagnosisModel patientDiagnosisModel)
         {
+            var patientDiagnosis =
+                SimpleMapper.Mapper.Map<PatientDiagnosisModel, PatientDiagnosis>(patientDiagnosisModel);
+
             _patientDiagnosisRepository.Delete(patientDiagnosis);
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MedicalExamination.Entities;
 
 namespace MedicalExamination.BLL
@@ -8,10 +9,11 @@ namespace MedicalExamination.BLL
     /// </summary>
     public interface IPatientDiagnosisService
     {
-        IEnumerable<PatientDiagnosis> GetAllPatientDiagnoses();
-        PatientDiagnosis GetPatientDiagnosis(int id);
-        void CreatePatientDiagnosis(PatientDiagnosis patientDiagnosis);
-        void UpdatePatientDiagnosis(PatientDiagnosis patientDiagnosis);
-        void DeletePatientDiagnosis(PatientDiagnosis patientDiagnosis);
+        IEnumerable<PatientDiagnosis> GetAllPatientDiagnosis();
+        IEnumerable<PatientDiagnosis> GetAllAppointmentDiagnosis(Guid appointmentId);
+        PatientDiagnosis GetPatientDiagnosis(Guid id);
+        void CreatePatientDiagnosis(PatientDiagnosisModel patientDiagnosisModel);
+        void UpdatePatientDiagnosis(PatientDiagnosisModel patientDiagnosisModel);
+        void DeletePatientDiagnosis(PatientDiagnosisModel patientDiagnosisModel);
     }
 }
