@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MedicalExamination.Entities;
 
 namespace MedicalExamination.BLL
@@ -8,10 +9,11 @@ namespace MedicalExamination.BLL
     /// </summary>
     public interface IPositionService
     {
-        IEnumerable<Position> GetAPositions();
-        Position GetPosition(int id);
-        void CreatePosition(Position position);
-        void UpdatePosition(Position position);
-        void DeletePosition(Position position);
+        IEnumerable<Position> GetAllPositions();
+        IEnumerable<Position> GetWorkerPositions(int id);
+        Position GetPosition(Guid id);
+        void CreatePosition(PositionModel positionModel);
+        void UpdatePosition(PositionModel positionModel);
+        void DeletePosition(PositionModel positionModel);
     }
 }

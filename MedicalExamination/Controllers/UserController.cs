@@ -15,9 +15,9 @@ namespace MedicalExamination.Controllers
         private readonly IUserService _userService;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public UserController(IUserService userService, UserManager<ApplicationUser> userManager)
+        public UserController(UserManager<ApplicationUser> userManager)
         {
-            _userService = userService;
+            
             _userManager = userManager;
         }
 
