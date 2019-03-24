@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MedicalExamination.DAL;
 using MedicalExamination.Entities;
 
@@ -16,29 +17,31 @@ namespace MedicalExamination.BLL
             _appointmentRepository = appointmentRepository;
         }
 
+        // TODO: realize logic of appointment
+
         public IEnumerable<Appointment> GetAllAppointments()
         {
             return _appointmentRepository.GetAll();
         }
 
-        public Appointment GetAppointment(int id)
+        public Appointment GetAppointment(Guid id)
         {
             return _appointmentRepository.GetById(id);
         }
 
-        public void CreateAppointment(Appointment appointment)
+        public void CreateAppointment(AppointmentModel appointmentModel)
         {
-            _appointmentRepository.Insert(appointment);
+            //_appointmentRepository.Insert(appointment);
         }
 
-        public void UpdateAppointment(Appointment appointment)
+        public void UpdateAppointment(AppointmentModel appointmentModel)
         {
-            _appointmentRepository.Update(appointment);
+            //_appointmentRepository.Update(appointment);
         }
 
-        public void DeleteAppointment(Appointment appointment)
+        public void DeleteAppointment(AppointmentModel appointmentModel)
         {
-            _appointmentRepository.Delete(appointment);
+            //_appointmentRepository.Delete(appointment);
         }
     }
 }

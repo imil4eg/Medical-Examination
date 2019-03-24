@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MedicalExamination.Entities;
 
 namespace MedicalExamination.BLL
@@ -9,9 +10,9 @@ namespace MedicalExamination.BLL
     public interface IAppointmentService
     {
         IEnumerable<Appointment> GetAllAppointments();
-        Appointment GetAppointment(int id);
-        void CreateAppointment(Appointment appointment);
-        void UpdateAppointment(Appointment appointment);
-        void DeleteAppointment(Appointment appointment);
+        Appointment GetAppointment(Guid id);
+        void CreateAppointment(AppointmentModel appointmentModel);
+        void UpdateAppointment(AppointmentModel appointmentModel);
+        void DeleteAppointment(AppointmentModel appointmentModel);
     }
 }
