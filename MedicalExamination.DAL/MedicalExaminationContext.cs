@@ -34,6 +34,7 @@ namespace MedicalExamination.DAL
         public DbSet<ServiceResult> ServiceResults { get; set; }
         public DbSet<QuestionnaireAfter75> QuestionnaireAfter75 { get; set; }
         public DbSet<QuestionnaireTill75> QuestionnaireTill75 { get; set; }
+        public DbSet<ServiceResult> ServicesResults { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
