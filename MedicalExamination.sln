@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalExamination.DAL", "M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalExamination.BLL", "MedicalExamination.BLL\MedicalExamination.BLL.csproj", "{F7CB9BA0-EDB1-4B29-92B4-AA35AFEF0C67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleMapper", "SimpleMapper\SimpleMapper.csproj", "{BC1F79A3-E21E-41AF-B272-5E07EFC76E6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleMapper", "SimpleMapper\SimpleMapper.csproj", "{BC1F79A3-E21E-41AF-B272-5E07EFC76E6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

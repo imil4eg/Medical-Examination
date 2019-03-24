@@ -20,22 +20,20 @@ namespace MedicalExamination.DAL
         }
 
         public DbSet<Appointment> Appointments { get; set; }
-        public DbSet<DiagnosisType> DiagnosesTypes { get; set; }
         public DbSet<DiseaseOutcomeType> DiseaseOutcomeTypes { get; set; }
         public DbSet<Worker> Workers { get; set; }
         public DbSet<ExaminationResultType> ExaminationResultTypes { get; set; }
         public DbSet<InsuranceCompanyType> InsuranceCompanyTypes { get; set; }
         public DbSet<PassportIssuePlaceType> PassportIssuePlaceTypes { get; set; }
         public DbSet<Patient> Patients { get; set; }
-        public DbSet<PatientDiagnosis> PatientDiagnoses { get; set; }
         public DbSet<Person> Persons { get; set; }
         public DbSet<Position> Positions { get; set; }
         public DbSet<PositionType> PositionTypes { get; set; }
         public DbSet<ProvideService> ProvideServices { get; set; }
         public DbSet<ServiceType> ServiceTypes { get; set; }
         public DbSet<ServiceResult> ServiceResults { get; set; }
-        public DbSet<QuestionnaireAfter75> QuestionnaireAfter75s { get; set; }
-        public DbSet<QuestionnaireTill75> QuestionnaireTill75s { get; set; }
+        public DbSet<QuestionnaireAfter75> QuestionnaireAfter75 { get; set; }
+        public DbSet<QuestionnaireTill75> QuestionnaireTill75 { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -46,7 +44,7 @@ namespace MedicalExamination.DAL
             //}
 
             base.OnModelCreating(modelBuilder);
-
+            
             modelBuilder.Entity<Worker>().HasKey(w => w.PersonId);
             modelBuilder.Entity<ApplicationUser>().HasOne(u => u.Worker).WithOne();
             //modelBuilder.Entity<Worker>().HasOne(e => e.User).WithOne().HasForeignKey<ApplicationUser>();

@@ -4,14 +4,16 @@ using MedicalExamination.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MedicalExamination.Migrations
 {
     [DbContext(typeof(MedicalExaminationContext))]
-    partial class MedicalExaminationContextModelSnapshot : ModelSnapshot
+    [Migration("20190324194010_RemovedDiagnosisType")]
+    partial class RemovedDiagnosisType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
