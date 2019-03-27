@@ -48,7 +48,6 @@ namespace MedicalExamination.DAL
             
             modelBuilder.Entity<Worker>().HasKey(w => w.PersonId);
             modelBuilder.Entity<ApplicationUser>().HasOne(u => u.Worker).WithOne();
-            modelBuilder.Entity<DiseaseOutcomeType>().HasKey(d => d.AppointmentId);
             modelBuilder.Entity<Patient>().HasOne(p => p.Person).WithOne().OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<Appointment>().HasOne(p => p.Patient).WithOne().OnDelete(DeleteBehavior.Restrict);
 
