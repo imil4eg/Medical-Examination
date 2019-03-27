@@ -19,10 +19,6 @@ namespace MedicalExamination.Entities
         [ForeignKey("PatientId")]
         public Patient Patient { get; set; }
 
-        public Guid DiseaseOutcomeId { get; set; }
-        [ForeignKey("DiseaseOutcomeId")]
-        public DiseaseOutcomeType Outcome { get; set; }
-
         [Required]
         public Guid ExaminationResultId { get; set; }
         [ForeignKey("ExaminationResultId")]

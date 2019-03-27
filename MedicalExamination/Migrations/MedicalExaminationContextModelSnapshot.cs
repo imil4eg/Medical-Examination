@@ -108,8 +108,6 @@ namespace MedicalExamination.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("DiseaseOutcomeId");
-
                     b.Property<DateTime>("EndDate");
 
                     b.Property<Guid>("ExaminationResultId");
@@ -119,8 +117,6 @@ namespace MedicalExamination.Migrations
                     b.Property<int>("WorkerId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DiseaseOutcomeId");
 
                     b.HasIndex("ExaminationResultId");
 
@@ -134,13 +130,11 @@ namespace MedicalExamination.Migrations
 
             modelBuilder.Entity("MedicalExamination.Entities.DiseaseOutcomeType", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<Guid>("AppointmentId");
 
-                    b.Property<string>("Name")
-                        .IsRequired();
+                    b.Property<string>("Name");
 
-                    b.HasKey("Id");
+                    b.HasKey("AppointmentId");
 
                     b.ToTable("DiseaseOutcomeTypes");
                 });
@@ -591,11 +585,6 @@ namespace MedicalExamination.Migrations
 
             modelBuilder.Entity("MedicalExamination.Entities.Appointment", b =>
                 {
-                    b.HasOne("MedicalExamination.Entities.DiseaseOutcomeType", "Outcome")
-                        .WithMany()
-                        .HasForeignKey("DiseaseOutcomeId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("MedicalExamination.Entities.ExaminationResultType", "ExaminationResult")
                         .WithMany()
                         .HasForeignKey("ExaminationResultId")
@@ -609,6 +598,14 @@ namespace MedicalExamination.Migrations
                     b.HasOne("MedicalExamination.Entities.Worker", "Worker")
                         .WithMany()
                         .HasForeignKey("WorkerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MedicalExamination.Entities.DiseaseOutcomeType", b =>
+                {
+                    b.HasOne("MedicalExamination.Entities.Appointment", "Appointment")
+                        .WithMany()
+                        .HasForeignKey("AppointmentId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
