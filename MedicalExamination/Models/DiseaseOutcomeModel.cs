@@ -1,15 +1,6 @@
-﻿using System;
-using System.Runtime.Serialization;
-
-namespace MedicalExamination
+﻿namespace MedicalExamination
 {
-    [DataContract]
-    public sealed class DiseaseOutcomeModel
+    public sealed class DiseaseOutcomeModel : BaseModel
     {
-        [DataMember(Name = "appointment_id")]
-        public Guid AppointmentId { get; set; }
-
-        [DataMember(Name = "name")]
-        public string Name { get; set; }
     }
 }
