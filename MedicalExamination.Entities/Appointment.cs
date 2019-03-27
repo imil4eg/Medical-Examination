@@ -25,6 +25,11 @@ namespace MedicalExamination.Entities
         public ExaminationResultType ExaminationResult { get; set; }
 
         [Required]
+        public Guid DiseaseOutcomeTypeId { get; set; }
+        [ForeignKey("DiseaseOutcomeTypeId")]
+        public DiseaseOutcomeType DiseaseOutcomeType { get; set; }
+
+        [Required]
         public DateTime EndDate { get; set; }
     }
 }
