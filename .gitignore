@@ -7,3 +7,4 @@
 */bin/*
 */node_modules/*
 *.user
+MedicalExamination.IsolatorCache.user
